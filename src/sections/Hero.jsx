@@ -1,5 +1,6 @@
 import React from "react";
 import { words } from "../constants";
+import Button from "../components/Button";
 
 const Hero = () => {
   return (
@@ -10,8 +11,8 @@ const Hero = () => {
 
       <div className="hero-layout">
         {/* LEFT: HERO CONTENT */}
-        <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
-          <div className="flex flex-col gap-7">
+        <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5 gap-7">
+          <div className="flex flex-col ">
             <div className="hero-text">
               <h1>
                 Shaping
@@ -38,10 +39,15 @@ const Hero = () => {
             </div>
           </div>
 
-          <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
-            Hi, I&apos;m Gerald, a sophomore computer enginering student with a passion for
-            code.
+          <p className="text-white-50 md:text-xl relative z-10 pointer-events-none ">
+            Hi, I&apos;m Gerald, a sophomore computer enginering student with a
+            passion for code.
           </p>
+          <Button
+            text="See My Work"
+            className="md:w-80 md:h-16 w-60 h-5"
+            id="counter"
+          />
         </header>
       </div>
     </section>
