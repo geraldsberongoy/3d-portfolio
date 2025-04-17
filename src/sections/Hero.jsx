@@ -129,16 +129,16 @@ const Hero = () => {
                 A sophomore Computer engineering student crafting innovative
                 solutions.
               </p>
-              <div className="flex flex-col md:flex-row gap-5 mt-5 z-20">
+              <div className="flex gap-5 mt-7 z-20">
                 <Button
-                  text="See My Work"
-                  className="md:w-80 md:h-16 w-60 h-5"
+                  text="View Projects"
+                  className="md:w-60 md:h-16 w-full h-5" // Changed from w-full h-5
                   id="counter"
                   svg={<ArrowDown className="text-black-50" />}
                 />
                 <Button
-                  text="See My CV"
-                  className="md:w-80 md:h-16 w-60 h-5"
+                  text="Resume"
+                  className="md:w-60 md:h-16 w-full h-5" // Changed from w-full h-5
                   id="counter"
                   svg={<SquareChartGantt className="text-black-50" />}
                 />

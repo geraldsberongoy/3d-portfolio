@@ -85,7 +85,7 @@ section {
   }
 
   .hero-text {
-    @apply flex flex-col justify-center md:text-[50px] text-[30px] font-semibold relative z-10 pointer-events-none leading-tight;
+    @apply flex flex-col justify-center md:text-[50px] text-[28px] font-semibold relative z-10 pointer-events-none leading-tight;
     img {
       @apply size-8 md:size-10 object-contain;
     }
@@ -207,32 +207,35 @@ section {
   }
 
   .cta-button {
-    @apply px-4 py-4 rounded-lg bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
+    @apply px-4 py-2 md:py-4 rounded-lg bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
 
     .bg-circle {
       @apply absolute -right-10 origin-center top-1/2 -translate-y-1/2 
-        w-[120%] h-[120%] group-hover:size-10 group-hover:right-10
+        w-[150%] h-[120%] sm:group-hover:size-10 sm:group-hover:right-10
         rounded-full bg-white-50 transition-all duration-500;
     }
 
     .text {
-      @apply uppercase md:text-lg text-black transition-all duration-500
-        group-hover:text-white-50 group-hover:-translate-x-5 xl:translate-x-0 -translate-x-5;
+      @apply text-sm md:text-base text-black transition-all duration-500
+        md:group-hover:text-white-50 md:group-hover:-translate-x-5 md:-translate-x-0 translate-x-0;
     }
 
     .arrow-wrapper {
-      @apply group-hover:bg-white-50 size-10 rounded-full absolute right-10 top-1/2 
-        -translate-y-1/2 flex justify-center items-center overflow-hidden;
+      @apply md:absolute relative md:right-10 md:top-1/2 md:-translate-y-1/2
+        md:group-hover:bg-white-50 size-8 md:size-10 rounded-full
+        flex justify-center items-center overflow-hidden ml-2;
 
       img {
-        @apply size-5 xl:-translate-y-32 translate-y-0 animate-bounce group-hover:translate-y-0 transition-all duration-500;
+        @apply size-5 md:-translate-y-32 translate-y-0
+          animate-bounce md:group-hover:translate-y-0 transition-all duration-500;
       }
+
       svg {
-        @apply size-5 xl:-translate-y-32 translate-y-0 animate-bounce group-hover:translate-y-0 transition-all duration-500;
+        @apply size-5 md:-translate-y-32 translate-y-0
+          animate-bounce sm:group-hover:translate-y-0 transition-all duration-500;
       }
     }
   }
-
   .card-border {
     @apply border border-black-50 bg-black-100;
   }
