@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import HeroExperience from "../components/HeroModels/HeroExperience";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, SquareChartGantt } from "lucide-react";
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -13,7 +13,7 @@ const Hero = () => {
     const ctx = gsap.context(() => {
       // Animate all h3 elements in hero-text
       gsap.fromTo(
-        ".hero-text h3",
+        ".hero-text h2",
         {
           y: 50,
           opacity: 0,
@@ -52,7 +52,7 @@ const Hero = () => {
         {
           scale: 1,
           opacity: 1,
-          duration: 1.2,
+          duration: 0.7,
           delay: 0.3,
           ease: "elastic.out(1,0.5)",
         }
@@ -68,7 +68,7 @@ const Hero = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 1.2,
+          duration: 1.6,
           delay: 0.8,
           ease: "power2.out",
         }
@@ -124,10 +124,10 @@ const Hero = () => {
               </h2>
               <h2>into Elegant Solutions</h2>
             </div>
-            <div >
+            <div>
               <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
-                A sophomore Computer engineering student crafting innovative solutions.
-
+                A sophomore Computer engineering student crafting innovative
+                solutions.
               </p>
               <div className="flex flex-col md:flex-row gap-5 mt-5 z-20">
                 <Button
@@ -136,7 +136,12 @@ const Hero = () => {
                   id="counter"
                   svg={<ArrowDown className="text-black-50" />}
                 />
-                
+                <Button
+                  text="See My CV"
+                  className="md:w-80 md:h-16 w-60 h-5"
+                  id="counter"
+                  svg={<SquareChartGantt className="text-black-50" />}
+                />
               </div>
             </div>
           </div>
