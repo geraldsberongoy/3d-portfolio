@@ -89,14 +89,14 @@ const Hero = () => {
         <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5 ">
           <div className="flex flex-col gap-4 ">
             {/* Bold name introduction */}
-            <div className="z-20">
+            <div className="z-20 mb-10">
               <p className="intro-text text-white text-xl md:text-2xl font-medium mb-1">
                 Hi, I'm
               </p>
-              <h1 className="name-highlight font-extrabold text-white text-4xl md:text-6xl lg:text-7xl mb-2 tracking-tight">
+              <h1 className="name-highlight font-bold text-white text-4xl md:text-6xl lg:text-7xl mb-2 tracking-tight">
                 Gerald S. Berongoy
               </h1>
-              <p className="title-highlight text-white-50 font-semibold text-xl md:text-2xl mb-5">
+              <p className="title-highlight text-white-50 font-semibold text-xl md:text-2xl">
                 Software Developer | Tech Enthusiast
               </p>
             </div>
@@ -122,13 +122,12 @@ const Hero = () => {
                   </span>
                 </span>
               </h2>
-              <h2>into Impactful Solutions</h2>
-              <h2>with Precision & Creativity</h2>
+              <h2>into Elegant Solutions</h2>
             </div>
             <div >
               <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
-                A sophomore computer engineering student with a passion for
-                creating innovative digital solutions.
+                A sophomore Computer engineering student crafting innovative solutions.
+
               </p>
               <div className="flex flex-col md:flex-row gap-5 mt-5 z-20">
                 <Button
@@ -137,6 +136,7 @@ const Hero = () => {
                   id="counter"
                   svg={<ArrowDown className="text-black-50" />}
                 />
+                
               </div>
             </div>
           </div>
