@@ -87,7 +87,7 @@ const Hero = () => {
       <div className="hero-layout">
         {/* LEFT: HERO CONTENT */}
         <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5 ">
-          <div className="flex flex-col gap-5 ">
+          <div className="flex flex-col gap-4 ">
             {/* Bold name introduction */}
             <div className="z-20">
               <p className="intro-text text-white text-xl md:text-2xl font-medium mb-1">
@@ -102,7 +102,7 @@ const Hero = () => {
             </div>
 
             <div className="hero-text">
-              <h3>
+              <h2>
                 Transforming
                 <span className="slide">
                   <span className="wrapper">
@@ -121,32 +121,32 @@ const Hero = () => {
                     ))}
                   </span>
                 </span>
-              </h3>
-              <h3>into Impactful Solutions</h3>
-              <h3>with Precision & Creativity</h3>
+              </h2>
+              <h2>into Impactful Solutions</h2>
+              <h2>with Precision & Creativity</h2>
             </div>
-            <p className="max-w-1/2 text-white-50 md:text-xl relative z-10 pointer-events-none">
-              A sophomore computer engineering student with a passion for
-              creating innovative digital solutions.
-            </p>
-            <div className="flex flex-col md:flex-row gap-5 mt-5 z-20">
-              <Button
-                text="See My Work"
-                className="md:w-80 md:h-16 w-60 h-5"
-                id="counter"
-                svg={<ArrowDown className="text-black-50"/>}
-              />
-
+            <div >
+              <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
+                A sophomore computer engineering student with a passion for
+                creating innovative digital solutions.
+              </p>
+              <div className="flex flex-col md:flex-row gap-5 mt-5 z-20">
+                <Button
+                  text="See My Work"
+                  className="md:w-80 md:h-16 w-60 h-5"
+                  id="counter"
+                  svg={<ArrowDown className="text-black-50" />}
+                />
+              </div>
             </div>
           </div>
-
-          {/* RIGHT: 3D MODEL */}
-          <figure>
-            <div className="hero-3d-layout">
-              <HeroExperience />
-            </div>
-          </figure>
         </header>
+        {/* RIGHT: 3D MODEL */}
+        <figure>
+          <div className="hero-3d-layout">
+            <HeroExperience />
+          </div>
+        </figure>
       </div>
     </section>
   );
