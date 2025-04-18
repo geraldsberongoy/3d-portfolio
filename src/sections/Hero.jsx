@@ -137,7 +137,7 @@ const Hero = () => {
                   svg={<ArrowDown className="text-black-50" />}
                 />
                 <Button
-                  text="Resume"
+                  text="View Resume"
                   className="md:w-60 md:h-16 w-full h-5" // Changed from w-full h-5
                   id="counter"
                   svg={<SquareChartGantt className="text-black-50" />}

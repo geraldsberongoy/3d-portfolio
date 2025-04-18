@@ -85,12 +85,12 @@ section {
   }
 
   .hero-text {
-    @apply flex flex-col justify-center md:text-[50px] text-[28px] font-semibold relative z-10 pointer-events-none leading-tight;
+    @apply flex flex-col justify-center md:text-[50px] text-[26px] font-semibold relative z-10 pointer-events-none leading-tight;
     img {
       @apply size-8 md:size-10 object-contain;
     }
     .slide {
-      @apply absolute pt-0 px-2 md:px-5 py-[30px] h-[48px] md:h-[78px] md:translate-y-1 translate-y-0 overflow-hidden;
+      @apply absolute pt-0 px-2 md:px-5 py-[30px] h-[35px] md:h-[78px] md:translate-y-1 translate-y-0 overflow-hidden;
     }
   }
 
@@ -216,7 +216,7 @@ section {
     }
 
     .text {
-      @apply text-sm md:text-base text-black transition-all duration-500
+      @apply text-[13px] md:text-base text-black transition-all duration-500
         md:group-hover:text-white-50 md:group-hover:-translate-x-5 md:-translate-x-0 translate-x-0;
     }
 
