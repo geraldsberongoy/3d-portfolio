@@ -135,6 +135,7 @@ const Hero = () => {
                   className="md:w-60 md:h-16 w-full h-5" // Changed from w-full h-5
                   id="counter"
                   svg={<ArrowDown className="text-black-50" />}
+                  href="#projects"
                 />
                 <Button
                   text="View Resume"
