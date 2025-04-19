@@ -174,7 +174,7 @@ const ProjectSection = () => {
               ref={(el) => (projectRefs.current[0] = el)}
             >
               <div
-                className={`xl:h-[70vh] md:h-[50vh] h-96 relative overflow-hidden rounded-xl ${
+                className={`xl:h-[70vh] md:h-[50vh] h-56 relative overflow-hidden rounded-xl ${
                   projects[0].bgColor || "bg-[#E0F2FF]"
                 }`}
               >
@@ -214,7 +214,7 @@ const ProjectSection = () => {
             {projects.slice(1).map((project, index) => (
               <div
                 key={project.id}
-                className="group w-1/2 lg:w-full  "
+                className="group w-full md:w-1/2 lg:w-full  "
                 ref={(el) => (projectRefs.current[index + 1] = el)}
               >
                 <div
