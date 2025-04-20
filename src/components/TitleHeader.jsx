@@ -1,6 +1,6 @@
-const TitleHeader = ({ title, sub }) => {
+const TitleHeader = ({ title, sub, className = "" }) => {
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className={`flex flex-col items-center gap-5 ${className}`}>
       <div className="hero-badge">
         <p>{sub}</p>
       </div>
