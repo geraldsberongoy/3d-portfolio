@@ -93,6 +93,14 @@ const ProjectSection = () => {
 
     // Reset project refs for new page
     projectRefs.current = projectRefs.current.slice(0, selectedProjects.length);
+
+    // Preload images for better performance
+    selectedProjects.forEach((project) => {
+      if (project.image) {
+        const img = new Image();
+        img.src = project.image;
+      }
+    });
   }, [currentPage]);
 
   useGSAP(() => {
@@ -181,8 +189,10 @@ const ProjectSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/10 z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
                 <img
                   src={projects[0].image}
-                  className="w-full h-full object-contain  xl:px-10 2xl:px-12 py-4 absolute inset-0 transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-contain xl:px-10 2xl:px-12 py-4 absolute inset-0 will-change-transform transform-gpu backface-visibility-hidden transition-transform duration-700 group-hover:scale-105"
                   alt={projects[0].title}
+                  loading="lazy"
+                  style={{ willChange: "transform" }}
                 />
 
                 {/* Tags */}
@@ -214,7 +224,7 @@ const ProjectSection = () => {
             {projects.slice(1).map((project, index) => (
               <div
                 key={project.id}
-                className="group w-full md:w-1/2 lg:w-full  "
+                className="group w-full md:w-1/2 lg:w-full"
                 ref={(el) => (projectRefs.current[index + 1] = el)}
               >
                 <div
@@ -226,7 +236,9 @@ const ProjectSection = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full px-5 py-5 object-contain rounded-xl transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full px-5 py-5 object-contain rounded-xl will-change-transform transform-gpu backface-visibility-hidden transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    style={{ willChange: "transform" }}
                   />
                   <div className="absolute bottom-4 left-4 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                     {project.tags?.map((tag, tagIndex) => (

@@ -1,18 +1,29 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { words } from "../constants";
 import Button from "../components/Button";
 import HeroExperience from "../components/HeroModels/HeroExperience";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ArrowDown, SquareChartGantt } from "lucide-react";
+import { useMediaQuery } from "react-responsive";
 
 const Hero = () => {
   const heroRef = useRef(null);
+  const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
-      // Animate all h3 elements in hero-text
-      gsap.fromTo(
+      // Use a single timeline for better performance and control
+      const tl = gsap.timeline({
+        defaults: {
+          ease: "power2.out", // Consistent easing for smoother animations
+          force3D: true, // Force GPU acceleration
+          overwrite: "auto", // Prevent conflicting animations
+        },
+      });
+
+      // Batch animations together to improve performance
+      tl.fromTo(
         ".hero-text h2",
         {
           y: 50,
@@ -21,73 +32,83 @@ const Hero = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 1.5,
-          stagger: 0.2,
-          ease: "power3.out",
+          duration: 1.2,
+          stagger: 0.15, // Reduced stagger time for better performance
+          clearProps: "transform", // Clean up transforms after animation
         }
-      );
-
-      // Intro animation
-      gsap.fromTo(
-        ".intro-text",
-        {
-          y: 30,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-        }
-      );
-
-      // Enhanced animation for your name
-      gsap.fromTo(
-        ".name-highlight",
-        {
-          scale: 0.95,
-          opacity: 0,
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.7,
-          delay: 0.3,
-          ease: "elastic.out(1,0.5)",
-        }
-      );
-
-      // Animation for professional title
-      gsap.fromTo(
-        ".title-highlight",
-        {
-          y: 20,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.6,
-          delay: 0.8,
-          ease: "power2.out",
-        }
-      );
+      )
+        .fromTo(
+          ".intro-text",
+          {
+            y: 30,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8, // Reduced duration
+          },
+          "-=0.5" // Start slightly before previous animation ends
+        )
+        .fromTo(
+          ".name-highlight",
+          {
+            scale: 0.95,
+            opacity: 0,
+          },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.6,
+            ease: "back.out(1.2)", // More performant than elastic
+            clearProps: "transform", // Clean up transforms after animation
+          },
+          "-=0.3"
+        )
+        .fromTo(
+          ".title-highlight",
+          {
+            y: 20,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8, // Reduced duration
+            clearProps: "transform",
+          },
+          "-=0.2"
+        );
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
+  // Optimize word slider animation with CSS instead of JS animations
   return (
     <section id="hero" className="relative overflow-hidden" ref={heroRef}>
       <div className="absolute top-0 left-0 z-10">
-        <img src="/images/bg.png" alt="background" />
+        <img
+          src="/images/bg.png"
+          alt="background"
+          loading="eager" // Force priority loading
+          width="100%"
+          height="auto"
+        />
       </div>
 
       <div className="hero-layout">
-        {/* LEFT: HERO CONTENT */}
-        <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5 ">
-          <div className="flex flex-col gap-4 ">
+        {/* HERO CONTENT */}
+        <header
+          className={`flex flex-col justify-center ${
+            isDesktop ? "md:w-full" : "w-full"
+          } ${!isDesktop && "items-center"} w-screen md:px-20 px-5`}
+        >
+          <div
+            className={`flex flex-col gap-4 ${
+              !isDesktop && "hero-content-wrapper"
+            }`}
+          >
             {/* Bold name introduction */}
             <div className="z-20 mb-10">
               <p className="intro-text text-white text-xl md:text-2xl font-medium mb-1">
@@ -115,6 +136,9 @@ const Hero = () => {
                           src={word.imgPath}
                           alt={word.text}
                           className="xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50"
+                          loading="lazy"
+                          width={48}
+                          height={48}
                         />
                         <span>{word.text}</span>
                       </span>
@@ -129,7 +153,7 @@ const Hero = () => {
                 A sophomore Computer engineering student crafting innovative
                 solutions.
               </p>
-              <div className="flex gap-5 mt-7 z-20">
+              <div className="flex gap-3 mt-7 z-20">
                 <Button
                   text="View Projects"
                   className="md:w-60 md:h-16 w-full h-5" // Changed from w-full h-5
@@ -147,12 +171,15 @@ const Hero = () => {
             </div>
           </div>
         </header>
-        {/* RIGHT: 3D MODEL */}
-        <figure>
-          <div className="hero-3d-layout">
-            <HeroExperience />
-          </div>
-        </figure>
+
+        {/* 3D MODEL - Only render on desktop */}
+        {isDesktop && (
+          <figure>
+            <div className="hero-3d-layout">
+              <HeroExperience />
+            </div>
+          </figure>
+        )}
       </div>
     </section>
   );

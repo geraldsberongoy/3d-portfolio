@@ -1,12 +1,17 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState } from "react";
 import { useFrame } from "@react-three/fiber";
+import { useMediaQuery } from "react-responsive";
 
 const Particles = ({ count = 200 }) => {
   const mesh = useRef();
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const frameCount = useRef(0);
+  const updateFrequency = isMobile ? 3 : 1; // Only update particles every n frames on mobile
+  const actualCount = isMobile ? Math.floor(count / 2) : count; // Reduce particle count on mobile
 
   const particles = useMemo(() => {
     const temp = [];
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < actualCount; i++) {
       temp.push({
         position: [
           (Math.random() - 0.5) * 10,
@@ -17,11 +22,15 @@ const Particles = ({ count = 200 }) => {
       });
     }
     return temp;
-  }, [count]);
+  }, [actualCount]);
 
   useFrame(() => {
+    // Skip frames to reduce CPU usage, especially on mobile
+    frameCount.current = (frameCount.current + 1) % updateFrequency;
+    if (frameCount.current !== 0) return;
+
     const positions = mesh.current.geometry.attributes.position.array;
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < actualCount; i++) {
       let y = positions[i * 3 + 1];
       y -= particles[i].speed;
       if (y < -2) y = Math.random() * 10 + 5;
@@ -30,7 +39,7 @@ const Particles = ({ count = 200 }) => {
     mesh.current.geometry.attributes.position.needsUpdate = true;
   });
 
-  const positions = new Float32Array(count * 3);
+  const positions = new Float32Array(actualCount * 3);
   particles.forEach((p, i) => {
     positions[i * 3] = p.position[0];
     positions[i * 3 + 1] = p.position[1];
@@ -42,7 +51,7 @@ const Particles = ({ count = 200 }) => {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={count}
+          count={actualCount}
           array={positions}
           itemSize={3}
         />
@@ -53,6 +62,7 @@ const Particles = ({ count = 200 }) => {
         transparent
         opacity={0.9}
         depthWrite={false}
+        sizeAttenuation
       />
     </points>
   );
