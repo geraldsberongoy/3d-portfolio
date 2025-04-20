@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Github } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,15 +15,17 @@ const projectsData = [
       "An app built to assist students in finding scholarships and educational resources.",
     image: "/images/projects/isko-chat.png",
     tags: ["Web App", "Next.js", "Supabase", "TailwindCSS", "AI"],
+    githubUrl: "https://github.com/DavidBatoDev/iskochatai",
   },
   {
     id: 2,
     title: "Sparkfest 2025",
     description:
-      "A comprehensive solution for libraries to manage books, members, and operations efficiently.",
+      "A web application for managing and organizing events for Sparkfest 2025.",
     image: "/images/projects/sparkfest.png",
     bgColor: "bg-[#FFEFDB]",
     tags: ["Web App", "React"],
+    githubUrl: "https://github.com/geraldsberongoy/sparkfest-2025",
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ const projectsData = [
     image: "/images/projects/password.png",
     bgColor: "bg-[#FFE7EB]",
     tags: ["React.js", "TailwindCSS", "Flask", "SQLite"],
+    githubUrl: "https://github.com/yourusername/password-manager",
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ const projectsData = [
     image: "/images/projects/alertech.png",
     bgColor: "bg-[#E0F2FF]",
     tags: ["Dashboard", "React.js", "TailwindCSS", "Firebase", "IOT"],
+    githubUrl: "https://github.com/geraldsberongoy/Arduino-Hackathon-Web",
   },
   {
     id: 5,
@@ -51,6 +55,7 @@ const projectsData = [
     image: "/images/projects/dsa.png",
     bgColor: "bg-[#F0EBFF]",
     tags: ["DSA", "React.js", "TailwindCSS"],
+    githubUrl: "https://github.com/JoshuaHM-p4/data-structures-vis-project",
   },
   {
     id: 6,
@@ -60,6 +65,7 @@ const projectsData = [
     image: "/images/projects/scam.png",
     bgColor: "bg-[#FFE8E8]",
     tags: ["Dashboard", "Python", "TKinter", "Flask", "SQLite"],
+    githubUrl: "https://github.com/JoshuaHM-p4/oop-scam-app",
   },
   {
     id: 7,
@@ -69,6 +75,7 @@ const projectsData = [
     image: "/images/projects/facial-attendance.png",
     bgColor: "bg-[#E0F2FF]",
     tags: ["Python", "OpenCV", "Facial Recognition"],
+    githubUrl: "https://github.com/geraldsberongoy/facial_recognition",
   },
 ];
 
@@ -194,6 +201,18 @@ const ProjectSection = () => {
                   loading="lazy"
                   style={{ willChange: "transform" }}
                 />
+                {/* Display GitHub icon in top-right corner */}
+                {projects[0].githubUrl && (
+                  <a
+                    href={projects[0].githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 transition-all"
+                    aria-label={`View ${projects[0].title} on GitHub`}
+                  >
+                    <Github size={16} className="text-white" />
+                  </a>
+                )}
 
                 {/* Tags */}
                 <div className="absolute bottom-6 left-6 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
@@ -240,6 +259,20 @@ const ProjectSection = () => {
                     loading="lazy"
                     style={{ willChange: "transform" }}
                   />
+
+                  {/* Display GitHub icon in top-right corner */}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 transition-all"
+                      aria-label={`View ${project.title} on GitHub`}
+                    >
+                      <Github size={16} className="text-white" />
+                    </a>
+                  )}
+
                   <div className="absolute bottom-4 left-4 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                     {project.tags?.map((tag, tagIndex) => (
                       <span
