@@ -55,14 +55,14 @@ const techCategories = [
         scale: 1,
         rotation: [0, 0, 0],
       },
-      // {
-      //   name: "Next.js",
-      //   modelPath: "/models/nextjs-transformed.glb",
-      //   scale: 1.2,
-      //   rotation: [0, 0, 0],
-      // },
-
-    ]
+      {
+        name: "Next.js",
+        modelPath: "/models/nextjs.glb",
+        scale: 2.7,
+        rotation: [0, 0, 0],
+        position: [0, -0.7, 0],
+      },
+    ],
   },
   {
     name: "Backend",
@@ -102,12 +102,11 @@ const techCategories = [
 
       {
         name: "Supabase",
-        modelPath: "/models/supabase.glb", 
-        scale:4,
+        modelPath: "/models/supabase.glb",
+        scale: 4,
         rotation: [0, 0.01, 0],
         position: [0, -0.5, 0],
       },
-
     ],
   },
   {
@@ -118,6 +117,12 @@ const techCategories = [
         modelPath: "/models/git-svg-transformed.glb",
         scale: 0.05,
         rotation: [0, -Math.PI / 4, 0],
+      },
+      {
+        name: "GitHub",
+        modelPath: "/models/github.glb",
+        scale: 2,
+        rotation: [0, 0, 0],
       },
     ],
   },
