@@ -82,7 +82,8 @@ const projectsData = [
 const ProjectSection = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [projects, setProjects] = useState([]);
-  const projectsPerPage = 3;
+  // Change to show 6 projects per page (3 columns × 2 rows)
+  const projectsPerPage = 6;
   const totalPages = Math.ceil(projectsData.length / projectsPerPage);
 
   const sectionRef = useRef(null);
@@ -111,34 +112,28 @@ const ProjectSection = () => {
   }, [currentPage]);
 
   useGSAP(() => {
-    // Animate header
+    // Simplified animations for header and projects
     gsap.fromTo(
       headerRef.current,
-      { y: -50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" }
-    );
-
-    // Animate main section
-    gsap.fromTo(
-      sectionRef.current,
       { opacity: 0 },
-      { opacity: 1, duration: 1.5 }
+      { opacity: 1, duration: 0.7, ease: "power1.out" }
     );
 
-    // Animate each project card with delay
+    // Simple fade-in for project cards with minimal stagger
     projectRefs.current.forEach((ref, index) => {
       if (ref) {
         gsap.fromTo(
           ref,
-          { y: 50, opacity: 0 },
+          { y: 20, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
-            delay: 0.3 * (index + 1),
+            duration: 0.5,
+            delay: 0.1 * (index % 3), // Subtle column-based stagger
+            ease: "power1.out",
             scrollTrigger: {
               trigger: ref,
-              start: "top bottom-=100",
+              start: "top bottom-=50",
             },
           }
         );
@@ -179,138 +174,86 @@ const ProjectSection = () => {
         </p>
       </div>
 
-      {/* Projects Display */}
+      {/* Projects Display - New 3×2 Grid Layout */}
       <div ref={sectionRef} className="w-full">
-        <div className="flex xl:flex-row flex-col gap-10 justify-between h-full overflow-hidden">
-          {/* LEFT  */}
-          {projects[0] && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+          {projects.map((project, index) => (
             <div
-              className="h-full flex flex-col justify-between xl:w-[60%] group "
-              ref={(el) => (projectRefs.current[0] = el)}
+              key={project.id}
+              className="flex flex-col group"
+              ref={(el) => (projectRefs.current[index] = el)}
             >
+              {/* Project Card */}
               <a
-                className={`xl:h-[70vh] md:h-[50vh] h-56 relative overflow-hidden rounded-xl cursor-pointer ${
-                  projects[0].bgColor || "bg-[#E0F2FF]"
-                }`}
-                href={projects[0].githubUrl}
+                href={project.githubUrl}
+                className="cursor-pointer block h-56 sm:h-48 md:h-52 lg:h-64 relative overflow-hidden rounded-xl"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/10 z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
-                <img
-                  src={projects[0].image}
-                  className="w-full h-full object-contain xl:px-10 2xl:px-12 py-4 absolute inset-0 will-change-transform transform-gpu backface-visibility-hidden transition-transform duration-700 group-hover:scale-105"
-                  alt={projects[0].title}
-                  loading="lazy"
-                  style={{ willChange: "transform" }}
-                />
-                {/* Display GitHub icon in top-right corner */}
-                {projects[0].githubUrl && (
-                  <a
-                    href={projects[0].githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 transition-all"
-                    aria-label={`View ${projects[0].title} on GitHub`}
-                    title="View on Github"
-                  >
-                    <Github size={16} className="text-white" />
-                  </a>
-                )}
+                <div
+                  className={`w-full h-full ${
+                    project.bgColor || "bg-black-100"
+                  }`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/10 z-10 opacity-30 group-hover:opacity-70 transition-opacity duration-300"></div>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-contain px-5 py-5 will-change-transform transform-gpu backface-visibility-hidden transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    style={{ willChange: "transform" }}
+                  />
 
-                {/* Tags */}
-                <div className="absolute bottom-6 left-6 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                  {projects[0].tags?.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-blue-500/80 text-white text-sm font-medium rounded-full"
+                  {/* GitHub icon */}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 transition-all"
+                      aria-label={`View ${project.title} on GitHub`}
+                      title="View on Github"
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      <Github size={16} className="text-white" />
+                    </a>
+                  )}
+
+                  {/* Tags */}
+                  <div className="absolute bottom-4 left-4 z-20 flex flex-wrap gap-1.5 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                    {project.tags?.slice(0, 4).map((tag, tagIndex) => (
+                      <span
+                        key={`${project.id}-tag-${tagIndex}`}
+                        className="px-2 py-0.5 bg-blue-500/80 text-white text-xs font-medium rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags?.length > 4 && (
+                      <span className="px-2 py-0.5 bg-gray-500/80 text-white text-xs font-medium rounded-full">
+                        +{project.tags.length - 4}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </a>
-              {/* Title and description */}
-              <div className="space-y-2 mt-5">
-                <h2 className="text-base w-full md:text-lg lg:text-xl font-semibold group-hover:text-blue-400 transition-colors duration-300">
-                  {projects[0].title}
-                </h2>
-                <p className="text-white-50 md:text-lg">
-                  {projects[0].description}
-                </p>
-              </div>
-            </div>
-          )}
 
-          {/* RIGHT */}
-          <div className="flex md:flex-row flex-col xl:flex-col justify-between gap-5 w-full xl:w-[40%] scrollbar-none">
-            {projects.slice(1).map((project, index) => (
-              <div
-                key={project.id}
-                className="group w-full md:w-1/2 lg:w-full"
-                ref={(el) => (projectRefs.current[index + 1] = el)}
-              >
-                {/* Project Card */}
-                <a
-                  href={project.githubUrl}
-                  className="cursor-pointer"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div
-                    className={`xl:h-[29vh] md:h-48 lg:h-60 h-56 relative rounded-xl xl:px-5 2xl:px-12 py-0  ${
-                      project.bgColor || "bg-black-100"
-                    } overflow-hidden`}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10 opacity-30 group-hover:opacity-70 transition-opacity duration-300"></div>
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full px-5 py-5 object-contain rounded-xl will-change-transform transform-gpu backface-visibility-hidden transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                      style={{ willChange: "transform" }}
-                    />
-
-                    {/* Display GitHub icon in top-right corner */}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 transition-all"
-                        aria-label={`View ${project.title} on GitHub`}
-                      >
-                        <Github size={16} className="text-white" />
-                      </a>
-                    )}
-
-                    <div className="absolute bottom-4 left-4 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                      {project.tags?.map((tag, tagIndex) => (
-                        <span
-                          key={`${project.id}-tag-${tagIndex}`}
-                          className="px-2 py-1 bg-blue-500/80 text-white text-xs font-medium rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </a>
-
-                <h2 className="text-base md:text-lg lg:text-xl font-semibold mt-3 group-hover:text-blue-400 transition-colors duration-300 line-clamp-1">
+              {/* Project title and description */}
+              <div className="mt-3 space-y-1.5">
+                <h3 className="text-base md:text-lg font-semibold group-hover:text-blue-400 transition-colors duration-300 line-clamp-1">
                   {project.title}
-                </h2>
-                <p className="text-white-50 mt-1 text-sm md:text-base">
+                </h3>
+                <p className="text-white-50 text-sm md:text-base line-clamp-2">
                   {project.description}
                 </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Pagination */}
-      <div className="mt-10 flex items-center justify-center gap-4">
+      <div className="mt-12 flex items-center justify-center gap-4">
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 0}
