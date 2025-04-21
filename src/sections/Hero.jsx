@@ -13,12 +13,12 @@ const Hero = () => {
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
 
   useGSAP(() => {
-    const ctx = gsap.context(() => {
+    
       // Single collective animation for the entire header content
       gsap.fromTo(
-        headerContentRef.current,
+        [".hero-animation", ".hero-text h2"],
         {
-          y: 30,
+          y: 50,
           opacity: 0,
         },
         {
@@ -28,10 +28,7 @@ const Hero = () => {
           ease: "power2.out",
         }
       );
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
+  });
 
   return (
     <section id="hero" className="relative overflow-hidden" ref={heroRef}>
@@ -48,25 +45,25 @@ const Hero = () => {
       <div className="hero-layout">
         {/* HERO CONTENT */}
         <header
-          className={`flex flex-col justify-center ${
+          className={`flex flex-col justify-center${
             isDesktop ? "md:w-full" : "w-full"
           } ${!isDesktop && "items-center"} w-screen md:px-20 px-5`}
         >
           <div
-            ref={headerContentRef}
+            // ref={headerContentRef}
             className={`flex flex-col gap-4 ${
               !isDesktop && "hero-content-wrapper"
             }`}
           >
             {/* Bold name introduction */}
             <div className="z-20 mb-10">
-              <p className="text-white text-xl md:text-2xl font-medium mb-1">
+              <p className="text-white text-xl md:text-2xl font-medium mb-1 hero-animation">
                 Hi, I'm
               </p>
-              <h1 className="font-bold text-white text-4xl md:text-6xl lg:text-7xl mb-2 tracking-tight">
+              <h1 className="font-bold text-white text-4xl md:text-6xl lg:text-7xl mb-2 tracking-tight hero-animation">
                 Gerald S. Berongoy
               </h1>
-              <p className="text-white-50 font-semibold text-xl md:text-2xl">
+              <p className="text-white-50 font-semibold text-xl md:text-2xl hero-animation">
                 Software Developer | Tech Enthusiast
               </p>
             </div>
@@ -98,21 +95,21 @@ const Hero = () => {
               <h2>into Elegant Solutions</h2>
             </div>
             <div>
-              <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
+              <p className="text-white-50 md:text-xl relative z-10 pointer-events-none hero-animation">
                 A sophomore Computer engineering student crafting innovative
                 solutions.
               </p>
               <div className="flex gap-3 mt-7 z-20">
                 <Button
                   text="View Projects"
-                  className="md:w-60 md:h-16 w-full h-5"
+                  className="md:w-60 md:h-16 w-full h-5 hero-animation"
                   id="counter"
                   svg={<ArrowDown className="text-black-50" />}
                   href="#projects"
                 />
                 <Button
                   text="View Resume"
-                  className="md:w-60 md:h-16 w-full h-5"
+                  className="md:w-60 md:h-16 w-full h-5 hero-animation"
                   id="counter"
                   svg={<SquareChartGantt className="text-black-50" />}
                 />
