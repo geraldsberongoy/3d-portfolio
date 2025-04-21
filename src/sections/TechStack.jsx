@@ -51,10 +51,18 @@ const TechStack = () => {
       ref={sectionRef}
     >
       <div className="w-full h-full md:px-10 px-5">
-        <TitleHeader
+        {/* <TitleHeader
           title="Technical Skills & Expertise"
           sub="🧰 My Technology Toolkit"
-        />
+        /> */}
+        <div className="mb-10 text-center">
+          <span className="text-blue-400 font-medium uppercase tracking-wider mb-3 inline-block">
+            My Skill
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            Technical Skills & Expertise
+          </h2>
+        </div>
 
         {/* Render all categories with headings - no animations on headings */}
         <div className="space-y-16 mt-16">

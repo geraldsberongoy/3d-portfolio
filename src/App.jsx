@@ -8,8 +8,8 @@ const App = () => {
     <>
       <NavBar />
       <Hero />
+      <TechStack />
       <ProjectSection />
-      < TechStack />
     </>
   );
 };
