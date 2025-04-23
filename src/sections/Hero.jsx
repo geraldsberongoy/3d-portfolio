@@ -4,30 +4,52 @@ import Button from "../components/Button";
 import HeroExperience from "../components/HeroModels/HeroExperience";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-import { ArrowDown, SquareChartGantt } from "lucide-react";
+import {
+  ArrowDown,
+  SquareChartGantt,
+  Github,
+  Linkedin,
+  Twitter,
+  Instagram,
+} from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 
 const Hero = () => {
   const heroRef = useRef(null);
-  const headerContentRef = useRef(null);
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
 
   useGSAP(() => {
-    
-      // Single collective animation for the entire header content
-      gsap.fromTo(
-        [".hero-animation", ".hero-text h2"],
-        {
-          y: 50,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-        }
-      );
+    // Text animation
+    gsap.fromTo(
+      [".hero-animation", ".hero-text h2"],
+      {
+        y: 50,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.in",
+      }
+    );
+
+    // Social icons animation - separate from hover effects
+    gsap.fromTo(
+      ".social-icon-wrapper",
+      {
+        scale: 0,
+        opacity: 0,
+      },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "back.out(1.7)",
+        delay: 0.2,
+      }
+    );
   });
 
   return (
@@ -50,7 +72,6 @@ const Hero = () => {
           } ${!isDesktop && "items-center"} w-screen md:px-20 px-5`}
         >
           <div
-            // ref={headerContentRef}
             className={`flex flex-col gap-4 ${
               !isDesktop && "hero-content-wrapper"
             }`}
@@ -66,6 +87,65 @@ const Hero = () => {
               <p className="text-white-50 font-semibold text-xl md:text-2xl hero-animation">
                 Software Developer | Tech Enthusiast
               </p>
+
+              {/* Social Media Links */}
+              <div className="flex items-center gap-2 mt-3">
+                {/* GitHub */}
+                <div className="hero-animation">
+                  <a
+                    href="https://github.com/geraldsberongoy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Github Profile"
+                    title="GitHub Profile"
+                    className="bg-[#333] hover:bg-[#24292e] p-2.5 rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <Github size={20} className="text-white" />
+                  </a>
+                </div>
+
+                {/* LinkedIn */}
+                <div className="hero-animation">
+                  <a
+                    href="https://linkedin.com/in/geraldberongoy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn Profile"
+                    title="LinkedIn Profile"
+                    className=" bg-[#0077B5] hover:bg-[#0069a6] p-2.5 rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <Linkedin size={20} className="text-white" />
+                  </a>
+                </div>
+
+                {/* Twitter */}
+                {/* <div className="hero-animation">
+                  <a
+                    href="https://twitter.com/yourhandle"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Twitter Profile"
+                    title="Twitter Profile"
+                    className=" bg-[#1DA1F2] hover:bg-[#0d8fd9] p-2.5 rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <Twitter size={22} className="text-white" />
+                  </a>
+                </div> */}
+
+                {/* Instagram */}
+                {/* <div className="hero-animation">
+                  <a
+                    href="https://instagram.com/yourusername"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram Profile"
+                    title="Instagram Profile"
+                    className=" bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] p-2.5 rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <Instagram size={22} className="text-white" />
+                  </a>
+                </div> */}
+              </div>
             </div>
 
             <div className="hero-text">
@@ -94,6 +174,7 @@ const Hero = () => {
               </h2>
               <h2>into Elegant Solutions</h2>
             </div>
+
             <div>
               <p className="text-white-50 md:text-xl relative z-10 pointer-events-none hero-animation">
                 A sophomore Computer engineering student crafting innovative
