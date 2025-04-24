@@ -1,15 +1,123 @@
 import { Environment, Float, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useEffect } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
+import { useMediaQuery } from "react-responsive";
 import * as THREE from "three";
 
-const TechIconCardExperience = ({ model }) => {
+// Fallback component to show while model is loading
+const ModelFallback = () => (
+  <mesh>
+    <sphereGeometry args={[1, 16, 16]} />
+    <meshStandardMaterial color="#4285F4" wireframe />
+  </mesh>
+);
+
+const TechIconCardExperience = ({ model, priority = false }) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const [modelLoaded, setModelLoaded] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(priority); // Only load high priority models immediately
+  const containerRef = useRef(null);
+
+  // Use Intersection Observer to detect when the card comes into view
+  useEffect(() => {
+    // Always load on desktop or if marked as priority
+    if (!isMobile || priority) {
+      setShouldLoad(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Only load the model when it's close to viewport
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" } // Start loading 200px before it comes into view
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.disconnect();
+      }
+    };
+  }, [isMobile, priority]);
+
+  // Use a lightweight placeholder until the model is loaded
+  if (!shouldLoad) {
+    return (
+      <div
+        ref={containerRef}
+        className="w-full h-full flex items-center justify-center bg-black-100 rounded-lg"
+      >
+        <div className="animate-pulse size-12 rounded-full bg-blue-600/20"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div ref={containerRef} className="w-full h-full">
+      <Canvas
+        dpr={isMobile ? [1, 1.5] : [1, 2]} // Lower resolution on mobile
+        gl={{
+          powerPreference: "high-performance",
+          alpha: true,
+          antialias: !isMobile,
+          precision: isMobile ? "lowp" : "highp",
+        }}
+        frameloop={modelLoaded ? "always" : "demand"} // Conserve power until model is loaded
+      >
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[5, 5, 5]} intensity={1} />
+        <spotLight
+          position={[10, 15, 10]}
+          angle={0.3}
+          penumbra={1}
+          intensity={2}
+        />
+
+        {/* Only add Environment on desktop or for loaded models to save resources */}
+        {(!isMobile || modelLoaded) && model.name !== "CSS" && (
+          <Environment preset="city" />
+        )}
+
+        <Suspense fallback={<ModelFallback />}>
+          <ModelWithLoading
+            model={model}
+            isMobile={isMobile}
+            onLoaded={() => setModelLoaded(true)}
+          />
+        </Suspense>
+
+        <OrbitControls
+          enableZoom={false}
+          enablePan={false}
+          rotateSpeed={0.5}
+          enableDamping={true}
+          dampingFactor={0.1}
+        />
+      </Canvas>
+    </div>
+  );
+};
+
+// Separate component to handle model loading and customization
+const ModelWithLoading = ({ model, isMobile, onLoaded }) => {
   const scene = useGLTF(model.modelPath);
 
   useEffect(() => {
+    // Let parent know the model is loaded
+    onLoaded();
+
     // Handle special cases for specific models
     scene.scene.traverse((child) => {
       if (child.isMesh) {
+
         // Only apply non-reflective material to the CSS model
         if (model.name === "CSS") {
           child.material = new THREE.MeshStandardMaterial({
@@ -28,49 +136,25 @@ const TechIconCardExperience = ({ model }) => {
         }
       }
     });
-  }, [scene, model.name]);
+  }, [scene, model.name, isMobile, onLoaded]);
+
+  const floatIntensity = isMobile ? 0.3 : 0.9;
+  const rotationIntensity = isMobile ? 0.2 : 0.5;
 
   return (
-    <Canvas>
-      <ambientLight intensity={0.3} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-      <spotLight
-        position={[10, 15, 10]}
-        angle={0.3}
-        penumbra={1}
-        intensity={2}
-      />
-      {model.name === "CSS" ? null : <Environment preset="city" />}
-
-      {/* 
-        The Float component from @react-three/drei is used to 
-        create a simple animation of the model floating in space.
-        The rotationIntensity and floatIntensity props control the
-        speed of the rotation and float animations respectively.
-
-        The group component is used to scale and rotate the model.
-        The rotation is set to the value of the model.rotation property,
-        which is an array of three values representing the rotation in
-        degrees around the x, y and z axes respectively.
-
-        The primitive component is used to render the 3D model.
-        The object prop is set to the scene object returned by the
-        useGLTF hook, which is an instance of THREE.Group. The
-        THREE.Group object contains all the objects (meshes, lights, etc)
-        that make up the 3D model.
-      */}
-      <Float speed={5.5} rotationIntensity={0.5} floatIntensity={0.9}>
-        <group
-          scale={model.scale}
-          rotation={model.rotation}
-          position={model.position}
-        >
-          <primitive object={scene.scene} />
-        </group>
-      </Float>
-
-      <OrbitControls enableZoom={false} />
-    </Canvas>
+    <Float
+      speed={5.5}
+      rotationIntensity={rotationIntensity}
+      floatIntensity={floatIntensity}
+    >
+      <group
+        scale={model.scale}
+        rotation={model.rotation}
+        position={model.position}
+      >
+        <primitive object={scene.scene} />
+      </group>
+    </Float>
   );
 };
 

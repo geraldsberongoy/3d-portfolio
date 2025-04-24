@@ -44,10 +44,20 @@ const TechStack = () => {
     );
   });
 
+  // Helper function to determine if a model should be prioritized
+  // Priority is given to the first 3 skills in the first category,
+  // and the first skill in other categories
+  const isPriorityModel = (categoryIndex, skillIndex) => {
+    if (categoryIndex === 0) {
+      return skillIndex < 3; // First 3 in first category (Frontend)
+    }
+    return skillIndex === 0; // First model in other categories
+  };
+
   return (
     <section
       id="skills"
-      className="min-hscreen relative overflow-hidden section-padding"
+      className="min-h-screen relative overflow-hidden section-padding"
       ref={sectionRef}
     >
       <div className="absolute top-6 left-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
@@ -86,7 +96,10 @@ const TechStack = () => {
                     {/* Content layer */}
                     <div className="tech-card-content">
                       <div className="tech-icon-wrapper">
-                        <TechIconCardExperience model={skill} />
+                        <TechIconCardExperience
+                          model={skill}
+                          priority={isPriorityModel(categoryIndex, skillIndex)}
+                        />
                       </div>
                       <div className="padding-x w-full">
                         <p>{skill.name}</p>
