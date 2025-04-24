@@ -33,23 +33,6 @@ const Hero = () => {
         ease: "power2.in",
       }
     );
-
-    // Social icons animation - separate from hover effects
-    gsap.fromTo(
-      ".social-icon-wrapper",
-      {
-        scale: 0,
-        opacity: 0,
-      },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "back.out(1.7)",
-        delay: 0.2,
-      }
-    );
   });
 
   return (
