@@ -47,17 +47,14 @@ const TechStack = () => {
   return (
     <section
       id="skills"
-      className="flex-center section-padding my-15"
+      className="min-hscreen relative overflow-hidden section-padding"
       ref={sectionRef}
     >
-      <div className="w-full h-full md:px-10 px-5">
-        {/* <TitleHeader
-          title="Technical Skills & Expertise"
-          sub="🧰 My Technology Toolkit"
-        /> */}
+      {/* Container to keep content centered */}
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           <span className="text-blue-400 font-medium uppercase tracking-wider mb-3 inline-block">
-            My Skill
+            My Skills
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
             Technical Skills & Expertise
