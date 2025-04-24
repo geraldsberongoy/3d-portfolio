@@ -1,14 +1,13 @@
 const TitleHeader = ({ title, sub, className = "" }) => {
   return (
-    <div className={`flex flex-col items-center gap-5 ${className}`}>
-      <div className="hero-badge">
-        <p>{sub}</p>
-      </div>
-      <div>
-        <h1 className="font-semibold md:text-5xl text-3xl text-center">
-          {title}
-        </h1>
-      </div>
+    <div className={`mb-20 text-center ${className}`}>
+      <span className="text-blue-400 font-medium uppercase tracking-wider mb-3 inline-block">
+        {title}
+      </span>
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+        {sub}
+      </h2>
+      <div className="h-1 w-24 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"/>
     </div>
   );
 };
