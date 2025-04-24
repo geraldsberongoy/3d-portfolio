@@ -168,7 +168,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-screen relative overflow-hidden section-padding"
+      className="min-h-screen relative overflow-hidden section-padding mt-10"
       ref={sectionRef}
     >
       {/* Background accent - subtle gradient similar to your hero section */}
@@ -185,7 +185,7 @@ const About = () => {
         />
 
         {/* Main content */}
-        <div className="flex flex-col md:flex-row gap-10 md:gap-12 items-center">
+        <div className="flex flex-col xl:flex-row gap-10 md:gap-12 items-center">
           {/* Image column */}
           <div className="flex justify-center items-center about-image">
             <div className="relative group rounded-2xl border border-black-50 bg-black-100">

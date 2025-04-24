@@ -36,7 +36,7 @@ const Hero = () => {
   });
 
   return (
-    <section id="hero" className="relative overflow-hidden" ref={heroRef}>
+    <section id="hero" className="relative overflow-hidden px-5 md:px-10" ref={heroRef}>
       <div className="absolute top-0 left-0 z-10">
         <img
           src="/images/bg.png"
@@ -48,7 +48,7 @@ const Hero = () => {
       </div>
 
       {/* Container to keep content centered */}
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 ">
         <div className="hero-layout">
           {/* HERO CONTENT */}
           <header

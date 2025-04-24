@@ -58,7 +58,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} id="contact" className="relative bg-black-100/50 py-16 mt-20 border-t border-black-50">
+    <footer ref={footerRef} id="contact" className="relative bg-black-100/50 py-16 mt-20 px-4 border-t border-black-50">
       {/* Background accents */}
       <div className="absolute top-0 left-1/4 size-64 rounded-full bg-blue-600/40 blur-3xl z-0"/>
       <di className="absolute bottom-0 right-1/4 size-64 rounded-full bg-purple-600/40 blur-3xl z-0"/>
