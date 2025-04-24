@@ -50,18 +50,11 @@ const TechStack = () => {
       className="min-hscreen relative overflow-hidden section-padding"
       ref={sectionRef}
     >
-<div className="absolute top-6 left-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
-<div className="absolute bottom-6 right-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
+      <div className="absolute top-6 left-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
+      <div className="absolute bottom-6 right-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
       {/* Container to keep content centered */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
-          <span className="text-blue-400 font-medium uppercase tracking-wider mb-3 inline-block">
-            My Skills
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Technical Skills & Expertise
-          </h2>
-        </div>
+        <TitleHeader title="My Skills" sub="Technical Skills & Expertise" />
 
         {/* Render all categories with headings - no animations on headings */}
         <div className="space-y-16 mt-16">
