@@ -300,11 +300,12 @@ const About = () => {
             </p>
 
             <p className="text-white-50 md:text-lg">
-              I specialize in frontend development using React, Next.js, and
-              Three.js, crafting immersive and interactive web experiences while
-              exploring the fascinating world of computer engineering. My
-              approach combines technical excellence with creative design
-              thinking to build intuitive and visually stunning applications.
+              I specialize in full-stack web development with expertise in
+              React, Next.js, and Node.js, creating responsive and interactive
+              digital experiences. My unique background in computer engineering
+              allows me to bridge hardware understanding with software
+              implementation, resulting in optimized and innovative solutions
+              that stand out in today's tech landscape.
             </p>
           </div>
         </div>
