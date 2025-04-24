@@ -50,6 +50,8 @@ const TechStack = () => {
       className="min-hscreen relative overflow-hidden section-padding"
       ref={sectionRef}
     >
+<div className="absolute top-6 left-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
+<div className="absolute bottom-6 right-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
       {/* Container to keep content centered */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">

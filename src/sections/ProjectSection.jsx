@@ -159,7 +159,9 @@ const ProjectSection = () => {
   };
 
   return (
-    <section id="projects" className="w-full section-padding relative overflow-hidden">
+    <section id="projects" className="w-full section-padding relative overflow-hidden mb-10">
+      <div className="absolute top-6 left-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
+      <div className="absolute bottom-6 right-6 size-20 md:size-100 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 blur-2xl z-0"></div>
       {/* Container to keep content centered */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
