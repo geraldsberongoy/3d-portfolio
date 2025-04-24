@@ -12,6 +12,7 @@ import {
   Lightbulb,
 } from "lucide-react";
 import TitleHeader from "../components/TitleHeader";
+import { BorderBeam } from "@/components/magicui/border-beam";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -185,18 +186,18 @@ const About = () => {
       <div className="flex flex-col md:flex-row gap-10 md:gap-12 items-center ">
         {/* Image column */}
         <div className="flex justify-center items-center about-image">
-          <div className="relative group">
+          <div className="relative group rounded-2xl border border-black-50 bg-black-100">
             {/* Main image with frame effect */}
+            <BorderBeam duration={8} size={200} />
             <img
               src="/images/myimg.jpg"
               alt="Gerald Berongoy"
-              className="rounded-3xl w-full max-w-md r z-10 relative card-border p-2"
+              className="rounded-3xl p-5 w-full max-w-md  z-10"
             />
-
             {/* Animated border effect */}
-            <div className="absolute inset-0 card" style={{ "--start": "180" }}>
+            {/* <div className="absolute inset-0 card" style={{ "--start": "180" }}>
               <div className="glow"></div>
-            </div>
+            </div> */}
           </div>
         </div>
 

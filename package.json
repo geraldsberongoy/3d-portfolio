@@ -15,11 +15,15 @@
     "@react-three/fiber": "^9.1.2",
     "@react-three/postprocessing": "^3.0.4",
     "@tailwindcss/vite": "^4.1.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "gsap": "^3.12.7",
     "lucide-react": "^0.488.0",
+    "motion": "^12.9.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-responsive": "^10.0.1",
+    "tailwind-merge": "^3.2.0",
     "tailwindcss": "^4.1.4",
     "three": "^0.175.0"
   },
@@ -32,6 +36,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
+    "tw-animate-css": "^1.2.8",
     "vite": "^6.2.0"
   }
 }
