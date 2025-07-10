@@ -48,7 +48,7 @@ const NavBar = () => {
     <header className={`navbar ${scrolled ? "scrolled" : "not-scrolled"}`}>
       <div className="inner">
         <a href="#hero" className="logo" onClick={(e) => handleNavClick(e, "#hero")}>
-          GeralDev
+          GB
         </a>
 
         <nav className="desktop">

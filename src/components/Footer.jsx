@@ -68,7 +68,7 @@ const Footer = () => {
           {/* Column 1: Logo and description */}
           <div className="space-y-6">
             <a href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="inline-block">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">GeralDev</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white">GB</h2>
               <div className="h-0.5 w-12 bg-gradient-to-r from-blue-600 to-purple-600 mt-1.5"></div>
             </a>
             <p className="text-white-50 md:max-w-xs">
@@ -94,7 +94,7 @@ const Footer = () => {
                 <Linkedin size={18} />
               </a>
               <a 
-                href="mailto:geraldberongoy@example.com" 
+                href="mailto:geraldberongoy04@gmail.com" 
                 className="icon"
                 aria-label="Email"
               >
@@ -148,7 +148,7 @@ const Footer = () => {
                   href="mailto:geraldberongoy@example.com" 
                   className="text-white-50 hover:text-white transition-colors line-clamp-1"
                 >
-                  geraldberongoy@example.com
+                  geraldberongoy04@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2">
