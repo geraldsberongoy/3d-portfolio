@@ -178,6 +178,9 @@ const Hero = () => {
                     className="md:w-60 md:h-16 w-full h-5 hero-animation"
                     id="counter"
                     svg={<SquareChartGantt className="text-black-50" />}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://docs.google.com/document/d/12Sj91nc5-t2na0UeoUpnIP3cTseSPudJ/edit?usp=sharing&ouid=108222698303140592739&rtpof=true&sd=true"
                   />
                 </div>
               </div>

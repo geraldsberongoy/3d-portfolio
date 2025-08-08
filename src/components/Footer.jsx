@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Github,
   Linkedin,
+  Facebook,
   Mail,
   ExternalLink,
   ArrowUpRight,
@@ -115,6 +116,15 @@ const Footer = () => {
                 aria-label="Email"
               >
                 <Mail size={18} />
+              </a>
+              <a
+                href="https://www.facebook.com/gerald.berongoy0904"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="icon"
+                aria-label="GitHub"
+              >
+                <Facebook size={18} />
               </a>
             </div>
           </div>
