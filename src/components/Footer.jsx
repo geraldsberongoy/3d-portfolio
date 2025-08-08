@@ -2,7 +2,13 @@ import React, { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Github, Linkedin, Mail, ExternalLink, ArrowUpRight } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  ArrowUpRight,
+} from "lucide-react";
 import { navLinks } from "../constants";
 
 // Register ScrollTrigger plugin
@@ -15,21 +21,21 @@ const Footer = () => {
   // Handle smooth scrolling with offset
   const handleNavClick = (e, link) => {
     e.preventDefault();
-    
+
     // Get the target element
     const targetElement = document.querySelector(link);
-    
+
     if (targetElement) {
       // Get the position of the element relative to the viewport
       const elementPosition = targetElement.getBoundingClientRect().top;
-      
+
       // Get the current scroll position
       const offsetPosition = elementPosition + window.pageYOffset - 80; // 80px offset
-      
+
       // Scroll to the target with offset
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   };
@@ -58,34 +64,44 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} id="contact" className="relative bg-black-100/50 py-16 mt-20 px-4 border-t border-black-50">
+    <footer
+      ref={footerRef}
+      id="contact"
+      className="relative bg-black-100/50 py-16 mt-20 px-4 border-t border-black-50"
+    >
       {/* Background accents */}
-      <div className="absolute top-0 left-1/4 size-64 rounded-full bg-blue-600/40 blur-3xl z-0"/>
-      <di className="absolute bottom-0 right-1/4 size-64 rounded-full bg-purple-600/40 blur-3xl z-0"/>
+      <div className="absolute top-0 left-1/4 size-64 rounded-full bg-blue-600/40 blur-3xl z-0" />
+      <di className="absolute bottom-0 right-1/4 size-64 rounded-full bg-purple-600/40 blur-3xl z-0" />
 
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="footer-animation grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
           {/* Column 1: Logo and description */}
           <div className="space-y-6">
-            <a href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="inline-block">
+            <a
+              href="#hero"
+              onClick={(e) => handleNavClick(e, "#hero")}
+              className="inline-block"
+            >
               <h2 className="text-2xl md:text-3xl font-bold text-white">GB</h2>
               <div className="h-0.5 w-12 bg-gradient-to-r from-blue-600 to-purple-600 mt-1.5"></div>
             </a>
             <p className="text-white-50 md:max-w-xs">
-              Transforming ideas into elegant software solutions. A portfolio showcasing my journey as a Computer Engineering student and developer.
+              Transforming ideas into elegant software solutions. A portfolio
+              showcasing my journey as a Computer Engineering student and
+              developer.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="https://github.com/geraldsberongoy" 
-                target="_blank" 
+              <a
+                href="https://github.com/geraldsberongoy"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="icon"
                 aria-label="GitHub"
               >
                 <Github size={18} />
               </a>
-              <a 
-                href="https://linkedin.com/in/geraldberongoy" 
+              <a
+                href="https://linkedin.com/in/geraldberongoy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="icon"
@@ -93,8 +109,8 @@ const Footer = () => {
               >
                 <Linkedin size={18} />
               </a>
-              <a 
-                href="mailto:geraldberongoy04@gmail.com" 
+              <a
+                href="mailto:geraldberongoy04@gmail.com"
                 className="icon"
                 aria-label="Email"
               >
@@ -105,33 +121,35 @@ const Footer = () => {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               {navLinks.map(({ name, link }) => (
                 <li key={name}>
-                  <a 
+                  <a
                     href={link}
                     onClick={(e) => handleNavClick(e, link)}
                     className="text-white-50 hover:text-white transition-colors flex items-center gap-1.5 group"
                   >
                     {name}
-                    <ArrowUpRight 
-                      size={14} 
-                      className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" 
+                    <ArrowUpRight
+                      size={14}
+                      className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
                     />
                   </a>
                 </li>
               ))}
               <li>
-                <a 
+                <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, "#contact")}
                   className="text-white-50 hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
                   Contact
-                  <ArrowUpRight 
-                    size={14} 
-                    className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" 
+                  <ArrowUpRight
+                    size={14}
+                    className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
                   />
                 </a>
               </li>
@@ -140,26 +158,31 @@ const Footer = () => {
 
           {/* Column 3: Get in Touch */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Get in Touch</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">
+              Get in Touch
+            </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
                 <Mail size={18} className="text-white-50 mt-1 shrink-0" />
-                <a 
-                  href="mailto:geraldberongoy@example.com" 
+                <a
+                  href="mailto:geraldberongoy@example.com"
                   className="text-white-50 hover:text-white transition-colors line-clamp-1"
                 >
                   geraldberongoy04@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2">
-                <ExternalLink size={18} className="text-white-50 mt-1 shrink-0" />
+                <ExternalLink
+                  size={18}
+                  className="text-white-50 mt-1 shrink-0"
+                />
                 <p className="text-white-50">Taguig, Philippines</p>
               </li>
             </ul>
 
             <div className="mt-6 relative group w-fit">
-              <a 
-                href="#hero" 
+              <a
+                href="#hero"
                 onClick={(e) => handleNavClick(e, "#hero")}
                 className="bg-black-200 hover:bg-black-50 transition-colors duration-300 px-4 py-2.5 rounded-lg font-medium text-white flex items-center gap-1.5"
               >
@@ -168,7 +191,6 @@ const Footer = () => {
               </a>
             </div>
           </div>
-
         </div>
 
         {/* Bottom section with copyright */}
@@ -176,8 +198,6 @@ const Footer = () => {
           <p className="text-white-50 text-sm text-center md:text-left">
             © {year} Gerald Berongoy. All rights reserved.
           </p>
-          
-          
         </div>
       </div>
     </footer>
