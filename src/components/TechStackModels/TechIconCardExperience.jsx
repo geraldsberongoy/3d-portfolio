@@ -60,6 +60,41 @@ const TechIconCardExperience = ({ model, priority = false }) => {
     );
   }
 
+  // On mobile, render 2D logo instead of 3D model
+  if (isMobile && model.logoPath) {
+    return (
+      <div
+        ref={containerRef}
+        className="w-full h-full flex items-center justify-center bg-black-100 rounded-lg"
+      >
+        <div className="relative w-16 h-16 flex items-center justify-center">
+          <img
+            src={model.logoPath}
+            alt={`${model.name} logo`}
+            className="w-full h-full object-contain filter drop-shadow-lg hover:scale-110 transition-transform duration-300"
+            style={{
+              maxWidth: "64px",
+              maxHeight: "64px",
+            }}
+            onError={(e) => {
+              // Fallback if logo fails to load
+              e.target.style.display = "none";
+              e.target.parentNode.innerHTML = `
+                <div class="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center">
+                  <span class="text-white text-xs font-semibold">${model.name.substring(
+                    0,
+                    2
+                  )}</span>
+                </div>
+              `;
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop: render 3D model with Canvas
   return (
     <div ref={containerRef} className="w-full h-full">
       <Canvas
@@ -117,7 +152,6 @@ const ModelWithLoading = ({ model, isMobile, onLoaded }) => {
     // Handle special cases for specific models
     scene.scene.traverse((child) => {
       if (child.isMesh) {
-
         // Only apply non-reflective material to the CSS model
         if (model.name === "CSS") {
           child.material = new THREE.MeshStandardMaterial({

@@ -1,28 +1,28 @@
 export const words = [
-    { text: "Ideas", imgPath: "/images/ideas.svg" },
-    { text: "Concepts", imgPath: "/images/concepts.svg" },
-    { text: "Designs", imgPath: "/images/designs.svg" },
-    { text: "Code", imgPath: "/images/code.svg" },
-    { text: "Ideas", imgPath: "/images/ideas.svg" },
-    { text: "Concepts", imgPath: "/images/concepts.svg" },
-    { text: "Designs", imgPath: "/images/designs.svg" },
-    { text: "Code", imgPath: "/images/code.svg" },
-  ];
+  { text: "Ideas", imgPath: "/images/ideas.svg" },
+  { text: "Concepts", imgPath: "/images/concepts.svg" },
+  { text: "Designs", imgPath: "/images/designs.svg" },
+  { text: "Code", imgPath: "/images/code.svg" },
+  { text: "Ideas", imgPath: "/images/ideas.svg" },
+  { text: "Concepts", imgPath: "/images/concepts.svg" },
+  { text: "Designs", imgPath: "/images/designs.svg" },
+  { text: "Code", imgPath: "/images/code.svg" },
+];
 
 export const navLinks = [
-    {
-      name: "About",
-      link: "#about",
-    },
-    {
-      name: "Skills",
-      link: "#skills",
-    },
-    {
-      name: "Projects",
-      link: "#projects",
-    },
-  ];
+  {
+    name: "About",
+    link: "#about",
+  },
+  {
+    name: "Skills",
+    link: "#skills",
+  },
+  {
+    name: "Projects",
+    link: "#projects",
+  },
+];
 
 export const techCategories = [
   {
@@ -31,6 +31,8 @@ export const techCategories = [
       {
         name: "HTML",
         modelPath: "/models/html5_logo.glb",
+        logoPath:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
         scale: 1,
         rotation: [0, -Math.PI / 2, 0],
         position: [0, -2.9, 0],
@@ -38,6 +40,8 @@ export const techCategories = [
       {
         name: "CSS",
         modelPath: "/models/final_css.glb",
+        logoPath:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
         scale: 0.07,
         rotation: [0.05, -0.006, 0],
         position: [0, -1.9, 0],
@@ -45,6 +49,8 @@ export const techCategories = [
       {
         name: "TailwindCSS",
         modelPath: "/models/tailwind.glb",
+        logoPath:
+          "https://tailwindcss.com/_next/static/media/tailwindcss-mark.d52e9897.svg",
         scale: 1.8,
         rotation: [0, 0, 0],
         position: [0, -0.26, 0],
@@ -52,6 +58,8 @@ export const techCategories = [
       {
         name: "JavaScript",
         modelPath: "/models/js.glb",
+        logoPath:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
         scale: 1.2,
         rotation: [0, 4.5, 0],
         position: [0, -0.26, 0],
@@ -59,6 +67,8 @@ export const techCategories = [
       {
         name: "TypeScript",
         modelPath: "/models/typescript.glb",
+        logoPath:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
         scale: 1.5,
         rotation: [0, 0, 0],
         position: [0, -0.2, 0],
@@ -66,12 +76,15 @@ export const techCategories = [
       {
         name: "React",
         modelPath: "/models/react_logo-transformed.glb",
+        logoPath: "/images/logos/react.png",
         scale: 1,
         rotation: [0, 0, 0],
       },
       {
         name: "Next.js",
         modelPath: "/models/nextjs.glb",
+        logoPath:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
         scale: 2.7,
         rotation: [0, 0, 0],
         position: [0, -0.7, 0],
@@ -84,12 +97,14 @@ export const techCategories = [
       {
         name: "Node.js",
         modelPath: "/models/node-transformed.glb",
+        logoPath: "/images/logos/node.png",
         scale: 5,
         rotation: [0, -Math.PI / 2, 0],
       },
       {
         name: "Python",
         modelPath: "/models/python-transformed.glb",
+        logoPath: "/images/logos/python.svg",
         scale: 0.8,
         rotation: [0, 0, 0],
       },
@@ -102,12 +117,16 @@ export const techCategories = [
       {
         name: "MySQL",
         modelPath: "/models/mysql.glb", // Placeholder, replace with actual MySQL model
+        logoPath:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
         scale: 1.5,
         rotation: [0, 0, 0],
       },
       {
         name: "MongoDB",
         modelPath: "/models/mongodb.glb", // Placeholder, replace with actual MongoDB model
+        logoPath:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
         scale: 5,
         rotation: [0, 0, 0],
         position: [0, -1, 0],
@@ -117,6 +136,8 @@ export const techCategories = [
       {
         name: "Supabase",
         modelPath: "/models/supabase.glb",
+        logoPath:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
         scale: 4,
         rotation: [0, 0.01, 0],
         position: [0, -0.5, 0],
@@ -130,6 +151,7 @@ export const techCategories = [
       {
         name: "Git",
         modelPath: "/models/git-svg-transformed.glb",
+        logoPath: "/images/logos/git.svg",
         scale: 0.05,
         rotation: [0, -Math.PI / 4, 0],
       },
@@ -137,6 +159,8 @@ export const techCategories = [
       {
         name: "GitHub",
         modelPath: "/models/github.glb",
+        logoPath:
+          "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png",
         scale: 2,
         rotation: [0, 0, 0],
       },
