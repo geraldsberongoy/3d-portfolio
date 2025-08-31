@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ChevronLeft, ChevronRight, Github } from "lucide-react";
+import { ChevronLeft, ChevronRight, Github, Link } from "lucide-react";
 import TitleHeader from "@/components/TitleHeader";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,59 +13,64 @@ const projectsData = [
     id: 1,
     title: "Isko-Chat Ai",
     description:
-      "An app built to assist students in finding scholarships and educational resources.",
+      "An app built to assist students in finding scholarships and educational resources. A collaborative project and I mainly focus on front-end and back-end development.",
     image: "/images/projects/isko-chat.png",
-    tags: ["Web App", "Next.js", "Supabase", "TailwindCSS", "AI"],
+    tags: [ "Next.js", "Supabase", "TailwindCSS", "AI"],
     githubUrl: "https://github.com/DavidBatoDev/iskochatai",
+    projectUrl: "https://iskochatai.vercel.app/",
   },
   {
     id: 2,
     title: "Sparkfest 2025",
     description:
-      "A web application for managing and organizing events for Sparkfest 2025.",
+      "A web application for managing and organizing events for Sparkfest 2025: PUP GDG Hackathon Event. Developed using React and TailwindCSS.",
     image: "/images/projects/sparkfest.png",
     bgColor: "bg-[#FFEFDB]",
     tags: ["Web App", "React", "TypeScript", "TailwindCSS"],
     githubUrl: "https://github.com/geraldsberongoy/sparkfest-2025",
+    projectUrl: "https://sparkfest-2025.vercel.app/",
   },
   {
     id: 3,
     title: "Password Manager",
     description:
-      "A CRUD application for securely managing and storing passwords.",
+      "A CRUD application for securely managing and storing passwords. Mainly explores user authentication and data encryption.",
     image: "/images/projects/password.png",
     bgColor: "bg-[#FFE7EB]",
     tags: ["React.js", "TailwindCSS", "Flask", "SQLite"],
-    githubUrl: "https://github.com/yourusername/password-manager",
+    githubUrl: "https://github.com/geraldsberongoy/password-manager-app",
+
   },
   {
     id: 4,
     title: "Alertech Web Dashboard",
     description:
-      "A web dashboard system to monitor realtime fire and gas leak detection",
+      "A web dashboard system to monitor realtime fire and gas leak detection. A collaborative project focusing on IoT and real-time data processing. I focused on the front-end development.",
     image: "/images/projects/alertech.png",
     bgColor: "bg-[#E0F2FF]",
-    tags: ["Dashboard", "React.js", "TailwindCSS", "Firebase", "IOT"],
+    tags: [ "React.js", "TailwindCSS", "Firebase", "IOT"],
     githubUrl: "https://github.com/geraldsberongoy/Arduino-Hackathon-Web",
   },
   {
     id: 5,
     title: "DSA Visualizer",
     description:
-      "A web application to visualize and understand various data structures and algorithms.",
+      "A web application to visualize and understand various data structures and algorithms. A school final project showcasing my skills in React and data structures.",
     image: "/images/projects/dsa.png",
     bgColor: "bg-[#F0EBFF]",
     tags: ["DSA", "React.js", "TailwindCSS"],
     githubUrl: "https://github.com/JoshuaHM-p4/data-structures-vis-project",
+    projectUrl: "https://rs-cs.vercel.app/",
+
   },
   {
     id: 6,
     title: "SCAM App",
     description:
-      "A Student Curricular Activity Management app to manage student activities.",
+      "A Student Curricular Activity Management app to manage student activities. A school final project mainly focused on full-stack Python development.",
     image: "/images/projects/scam.png",
     bgColor: "bg-[#FFE8E8]",
-    tags: ["Dashboard", "Python", "TKinter", "Flask", "SQLite"],
+    tags: [ "Python", "TKinter", "Flask", "SQLite"],
     githubUrl: "https://github.com/JoshuaHM-p4/oop-scam-app",
   },
   {
@@ -200,6 +205,19 @@ const ProjectSection = () => {
                       style={{ willChange: "transform" }}
                     />
 
+                    {/* Source Link */}
+                    {project.projectUrl && (
+                      <a
+                        href={project.projectUrl}
+                        className="absolute top-3 right-13 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 transition-all"
+                        aria-label={`View ${project.title} live demo`}
+                        title="View Live Demo"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Link size={16} className="text-white" />
+                      </a>
+                    )}
+
                     {/* GitHub icon */}
                     {project.githubUrl && (
                       <a
@@ -239,7 +257,7 @@ const ProjectSection = () => {
                   <h3 className="text-base md:text-lg font-semibold group-hover:text-blue-400 transition-colors duration-300 line-clamp-1">
                     {project.title}
                   </h3>
-                  <p className="text-white-50 text-sm md:text-base line-clamp-2">
+                  <p className="text-white-50 text-sm md:text-base line-clamp-4">
                     {project.description}
                   </p>
                 </div>

@@ -96,7 +96,7 @@ const Footer = () => {
                 href="https://github.com/geraldsberongoy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="icon"
+                className="p-2 rounded-full hover:bg-black-50 hover:scale-105 duration-300 transition-all"
                 aria-label="GitHub"
               >
                 <Github size={18} />
@@ -105,14 +105,14 @@ const Footer = () => {
                 href="https://linkedin.com/in/geraldberongoy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="icon"
+                className="p-2 rounded-full hover:bg-black-50 hover:scale-105 duration-300 transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
               </a>
               <a
                 href="mailto:geraldberongoy04@gmail.com"
-                className="icon"
+                className="p-2 rounded-full hover:bg-black-50 hover:scale-105 duration-300 transition-all"
                 aria-label="Email"
               >
                 <Mail size={18} />
@@ -121,8 +121,8 @@ const Footer = () => {
                 href="https://www.facebook.com/gerald.berongoy0904"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="icon"
-                aria-label="GitHub"
+                className="p-2 rounded-full hover:bg-black-50 hover:scale-105 duration-300 transition-all"
+                aria-label="Facebook"
               >
                 <Facebook size={18} />
               </a>
