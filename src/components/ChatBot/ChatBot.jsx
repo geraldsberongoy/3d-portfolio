@@ -117,12 +117,13 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="fixed bottom-3 right-5 z-50">
+
+    <div className={`fixed ${isMinimized ? "bottom-0" : "bottom-3"} right-5 z-50`}>
       {/* Chat Window */}
       {isOpen && (
         <div
-          className={`bg-black-100 rounded-2xl shadow-2xl border border-white/10 transition-all duration-300 ${
-            isMinimized ? "w-80 h-16" : "w-96 h-[600px]"
+          className={`bg-black-100 shadow-2xl border border-white/10 transition-all duration-300 ${
+            isMinimized ? "w-96 h-16 rounded-t-2xl" : "w-96 rounded-2xl"
           }`}
         >
           {/* Header */}
@@ -192,7 +193,7 @@ const ChatBot = () => {
               </div>
 
               {/* Input Area */}
-              <div className="p-4 border-t border-white/10 bg-black-100">
+              <div className="p-4 border-t border-white/10 bg-black-100 rounded-b-2xl">
                 <div className="flex items-end space-x-2">
                   <div className="flex-1 relative">
                     <textarea
@@ -226,7 +227,7 @@ const ChatBot = () => {
 
       {/* Toggle Button - Only show when chat is closed */}
       {!isOpen && (
-        <>
+        <div className="mb-6 mr-6 relative">
           <button
             onClick={toggleChat}
             className="w-14 h-14 bg-white-50 hover:bg-white-50/90 text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform hover:scale-105"
@@ -235,10 +236,10 @@ const ChatBot = () => {
           </button>
 
           {/* Subtle Notification Indicator */}
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-white-50 text-black text-xs rounded-full flex items-center justify-center">
+          <div className="absolute top-0 right-0 w-4 h-4 bg-white-50 text-black text-xs rounded-full flex items-center justify-center">
             <div className="w-2 h-2 bg-black rounded-full"></div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
