@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Send, MessageCircle, Minimize2, Maximize2, Bot } from 'lucide-react';
-import ChatMessage from './ChatMessage';
-import TypingIndicator from './TypingIndicator';
-import { chatbotService } from '../../services/chatbotService';
+import React, { useState, useRef, useEffect } from "react";
+import { Send, MessageCircle, Minimize2, Maximize2, Bot } from "lucide-react";
+import ChatMessage from "./ChatMessage";
+import TypingIndicator from "./TypingIndicator";
+import { chatbotService } from "../../services/chatbotService";
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,18 +11,18 @@ const ChatBot = () => {
     {
       id: 1,
       text: "Hi! I'm Gerald's AI assistant. Ask me anything about his projects, skills, or experience!",
-      sender: 'bot',
-      timestamp: new Date()
-    }
+      sender: "bot",
+      timestamp: new Date(),
+    },
   ]);
-  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -35,51 +35,51 @@ const ChatBot = () => {
     const userMessage = {
       id: Date.now(),
       text: inputMessage,
-      sender: 'user',
-      timestamp: new Date()
+      sender: "user",
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
-    setInputMessage('');
+    setMessages((prev) => [...prev, userMessage]);
+    setInputMessage("");
     setIsLoading(true);
     setIsTyping(true);
 
     try {
       const response = await chatbotService.sendMessage(inputMessage);
-      
+
       // Simulate typing delay for better UX
       setTimeout(() => {
         const botMessage = {
           id: Date.now() + 1,
           text: response.reply,
-          sender: 'bot',
+          sender: "bot",
           timestamp: new Date(),
           source: response.source,
-          provider: response.provider
+          provider: response.provider,
         };
 
-        setMessages(prev => [...prev, botMessage]);
+        setMessages((prev) => [...prev, botMessage]);
         setIsTyping(false);
         setIsLoading(false);
       }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
     } catch (error) {
-      console.error('Chat error:', error);
+      console.error("Chat error:", error);
       const errorMessage = {
         id: Date.now() + 1,
         text: "Sorry, I'm having trouble connecting right now. Please try again later.",
-        sender: 'bot',
+        sender: "bot",
         timestamp: new Date(),
-        isError: true
+        isError: true,
       };
 
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
       setIsTyping(false);
       setIsLoading(false);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
@@ -101,7 +101,7 @@ const ChatBot = () => {
     "What projects has Gerald built?",
     "What are his technical skills?",
     "Tell me about his experience",
-    "How can I contact him?"
+    "How can I contact him?",
   ];
 
   const handleSuggestionClick = (suggestion) => {
@@ -113,9 +113,11 @@ const ChatBot = () => {
     <div className="fixed bottom-3 right-5 z-50">
       {/* Chat Window */}
       {isOpen && (
-        <div className={`bg-black-100 rounded-2xl shadow-2xl border border-white/10 transition-all duration-300 ${
-          isMinimized ? 'w-80 h-16' : 'w-96 h-[600px]'
-        }`}>
+        <div
+          className={`bg-black-100 rounded-2xl shadow-2xl border border-white/10 transition-all duration-300 ${
+            isMinimized ? "w-80 h-16" : "w-96 h-[600px]"
+          }`}
+        >
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-white/10 rounded-t-2xl bg-black-50">
             <div className="flex items-center space-x-3">
@@ -123,7 +125,9 @@ const ChatBot = () => {
                 <Bot size={20} className="text-white-50" />
               </div>
               <div>
-                <h3 className="font-medium text-sm text-white-50">Gerald's AI Assistant</h3>
+                <h3 className="font-medium text-sm text-white-50">
+                  Gerald's AI Assistant
+                </h3>
                 <p className="text-xs text-white-50/60">Online</p>
               </div>
             </div>
@@ -132,7 +136,11 @@ const ChatBot = () => {
                 onClick={toggleMinimize}
                 className="w-8 h-8 rounded-full bg-white-50/10 hover:bg-white-50/20 flex items-center justify-center transition-colors"
               >
-                {isMinimized ? <Maximize2 size={16} className="text-white-50" /> : <Minimize2 size={16} className="text-white-50" />}
+                {isMinimized ? (
+                  <Maximize2 size={16} className="text-white-50" />
+                ) : (
+                  <Minimize2 size={16} className="text-white-50" />
+                )}
               </button>
             </div>
           </div>
@@ -145,9 +153,9 @@ const ChatBot = () => {
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
-                
+
                 {isTyping && <TypingIndicator />}
-                
+
                 {messages.length === 1 && (
                   <div className="space-y-2">
                     <p className="text-sm text-white-50/60 text-center mb-3">
@@ -166,7 +174,7 @@ const ChatBot = () => {
                     </div>
                   </div>
                 )}
-                
+
                 <div ref={messagesEndRef} />
               </div>
 
@@ -182,7 +190,7 @@ const ChatBot = () => {
                       placeholder="Ask me about Gerald's portfolio..."
                       className="w-full px-4 py-2 pr-12 border border-white/10 rounded-xl resize-none focus:outline-none focus:ring-1 focus:ring-white-50/30 bg-black-50 text-white-50 placeholder:text-white-50/40 text-sm"
                       rows="1"
-                      style={{ minHeight: '40px', maxHeight: '120px' }}
+                      style={{ minHeight: "40px", maxHeight: "120px" }}
                       disabled={isLoading}
                     />
                   </div>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Bot } from 'lucide-react';
+import React from "react";
+import { Bot } from "lucide-react";
 
 const TypingIndicator = () => {
   return (
@@ -15,9 +15,18 @@ const TypingIndicator = () => {
           <div className="px-4 py-3 bg-black-50 text-white-50 rounded-2xl rounded-bl-sm shadow-sm border border-white/10">
             <div className="flex items-center space-x-1">
               <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-white-50/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                <div className="w-2 h-2 bg-white-50/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                <div className="w-2 h-2 bg-white-50/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                <div
+                  className="w-2 h-2 bg-white-50/60 rounded-full animate-bounce"
+                  style={{ animationDelay: "0ms" }}
+                ></div>
+                <div
+                  className="w-2 h-2 bg-white-50/60 rounded-full animate-bounce"
+                  style={{ animationDelay: "150ms" }}
+                ></div>
+                <div
+                  className="w-2 h-2 bg-white-50/60 rounded-full animate-bounce"
+                  style={{ animationDelay: "300ms" }}
+                ></div>
               </div>
               <span className="text-xs text-white-50/50 ml-2">typing...</span>
             </div>
