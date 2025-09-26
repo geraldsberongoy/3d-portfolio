@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Send, MessageCircle, Minimize2, Maximize2, Bot } from "lucide-react";
+import { Send, MessageCircle, Minimize2, Maximize2, Bot, X } from "lucide-react";
 import ChatMessage from "./ChatMessage";
 import TypingIndicator from "./TypingIndicator";
 import { chatbotService } from "../../services/chatbotService";
@@ -141,6 +141,12 @@ const ChatBot = () => {
                 ) : (
                   <Minimize2 size={16} className="text-white-50" />
                 )}
+              </button>
+              <button
+                onClick={toggleChat}
+                className="w-8 h-8 rounded-full bg-white-50/10 hover:bg-white-50/20 flex items-center justify-center transition-colors"
+              >
+                <X size={16} className="text-white-50" />
               </button>
             </div>
           </div>
