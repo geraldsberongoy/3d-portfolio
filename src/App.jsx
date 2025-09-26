@@ -4,6 +4,7 @@ import About from "./sections/About";
 import ProjectSection from "./sections/ProjectSection";
 import TechStack from "./sections/TechStack";
 import Footer from "./components/Footer";
+import ChatBot from "./components/ChatBot/ChatBot";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <TechStack />
       <ProjectSection />
       <Footer />
+      <ChatBot />
     </>
   );
 };
