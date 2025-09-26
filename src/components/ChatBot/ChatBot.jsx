@@ -117,8 +117,9 @@ const ChatBot = () => {
   };
 
   return (
-
-    <div className={`fixed ${isMinimized ? "bottom-0" : "bottom-3"} right-5 z-50`}>
+    <div
+      className={`fixed ${isMinimized ? "bottom-0" : "bottom-3"} right-3 z-50`}
+    >
       {/* Chat Window */}
       {isOpen && (
         <div
@@ -145,16 +146,22 @@ const ChatBot = () => {
                 className="w-8 h-8 rounded-full bg-white-50/10 hover:bg-white-50/20 flex items-center justify-center transition-colors"
               >
                 {isMinimized ? (
-                  <Maximize2 size={16} className="text-white-50" />
+                  <Maximize2
+                    size={16}
+                    className="text-white-50 cursor-pointer"
+                  />
                 ) : (
-                  <Minimize2 size={16} className="text-white-50" />
+                  <Minimize2
+                    size={16}
+                    className="text-white-50 cursor-pointer"
+                  />
                 )}
               </button>
               <button
                 onClick={toggleChat}
                 className="w-8 h-8 rounded-full bg-white-50/10 hover:bg-white-50/20 flex items-center justify-center transition-colors"
               >
-                <X size={16} className="text-white-50" />
+                <X size={16} className="text-white-50 cursor-pointer" />
               </button>
             </div>
           </div>
@@ -194,7 +201,7 @@ const ChatBot = () => {
 
               {/* Input Area */}
               <div className="p-4 border-t border-white/10 bg-black-100 rounded-b-2xl">
-                <div className="flex items-end space-x-2">
+                <div className="flex justify-center space-x-2">
                   <div className="flex-1 relative">
                     <textarea
                       ref={inputRef}
@@ -213,7 +220,7 @@ const ChatBot = () => {
                     disabled={!inputMessage.trim() || isLoading}
                     className="w-10 h-10 bg-white-50 text-black hover:bg-white-50/90 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-all duration-200 transform hover:scale-105"
                   >
-                    <Send size={16} />
+                    <Send size={16} className="cursor-pointer" />
                   </button>
                 </div>
                 <div className="text-xs text-white-50/40 mt-2 text-center">
