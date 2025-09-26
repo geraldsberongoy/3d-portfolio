@@ -1,5 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Send, MessageCircle, Minimize2, Maximize2, Bot, X } from "lucide-react";
+import {
+  Send,
+  MessageCircle,
+  Minimize2,
+  Maximize2,
+  Bot,
+  X,
+} from "lucide-react";
 import ChatMessage from "./ChatMessage";
 import TypingIndicator from "./TypingIndicator";
 import { chatbotService } from "../../services/chatbotService";
