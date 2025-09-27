@@ -11,6 +11,7 @@ Vercel provides the best integration for React applications with automatic deplo
 #### Setup Steps
 
 1. **Connect Repository**
+
    ```bash
    # Push your code to GitHub if not already done
    git remote add origin https://github.com/yourusername/3d-portfolio.git
@@ -18,6 +19,7 @@ Vercel provides the best integration for React applications with automatic deplo
    ```
 
 2. **Deploy to Vercel**
+
    - Visit [vercel.com](https://vercel.com)
    - Click "New Project"
    - Import your GitHub repository
@@ -28,6 +30,7 @@ Vercel provides the best integration for React applications with automatic deplo
      - **Install Command**: `npm install`
 
 3. **Environment Variables** (if needed)
+
    ```bash
    VITE_ANALYTICS_ID=your_vercel_analytics_id
    VITE_CHATBOT_API_URL=your_chatbot_endpoint
@@ -38,6 +41,7 @@ Vercel provides the best integration for React applications with automatic deplo
    - Configure DNS settings with your domain provider
 
 #### Automatic Deployments
+
 - Every push to `main` branch triggers automatic deployment
 - Pull requests create preview deployments
 - Rollback capability through Vercel dashboard
@@ -49,12 +53,14 @@ Alternative platform with excellent static site hosting.
 #### Setup Steps
 
 1. **Build Settings**
+
    - **Build Command**: `npm run build`
    - **Publish Directory**: `dist`
    - **Node Version**: `18.x` (in environment variables)
 
 2. **Redirects Configuration**
    Create `public/_redirects` file:
+
    ```
    /*    /index.html   200
    ```
@@ -69,6 +75,7 @@ Alternative platform with excellent static site hosting.
 For shared hosting or VPS deployment.
 
 #### Build Process
+
 ```bash
 # Install dependencies
 npm install
@@ -81,6 +88,7 @@ ls dist/
 ```
 
 #### Upload Files
+
 1. Upload contents of `dist/` folder to your web server
 2. Configure server to serve `index.html` for all routes
 3. Set up HTTPS certificate
@@ -88,6 +96,7 @@ ls dist/
 #### Server Configuration
 
 **Apache (.htaccess)**
+
 ```apache
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -108,15 +117,16 @@ ls dist/
 ```
 
 **Nginx**
+
 ```nginx
 server {
     listen 80;
     server_name yourdomain.com;
-    
+
     location / {
         root /var/www/portfolio/dist;
         try_files $uri $uri/ /index.html;
-        
+
         # Cache static assets
         location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
             expires 1M;
@@ -131,6 +141,7 @@ server {
 For containerized deployments.
 
 ### Dockerfile
+
 ```dockerfile
 # Build stage
 FROM node:18-alpine as build
@@ -157,8 +168,9 @@ CMD ["nginx", "-g", "daemon off;"]
 ```
 
 ### Docker Compose
+
 ```yaml
-version: '3.8'
+version: "3.8"
 services:
   portfolio:
     build: .
@@ -170,6 +182,7 @@ services:
 ```
 
 ### Build and Run
+
 ```bash
 # Build image
 docker build -t 3d-portfolio .
@@ -188,6 +201,7 @@ docker-compose up -d
 Cost-effective solution for static site hosting.
 
 #### S3 Setup
+
 ```bash
 # Build the project
 npm run build
@@ -208,32 +222,38 @@ aws s3 website s3://your-portfolio-bucket \
 ```
 
 #### CloudFront Configuration
+
 ```json
 {
-  "Origins": [{
-    "DomainName": "your-portfolio-bucket.s3.amazonaws.com",
-    "Id": "S3-your-portfolio-bucket",
-    "S3OriginConfig": {
-      "OriginAccessIdentity": ""
+  "Origins": [
+    {
+      "DomainName": "your-portfolio-bucket.s3.amazonaws.com",
+      "Id": "S3-your-portfolio-bucket",
+      "S3OriginConfig": {
+        "OriginAccessIdentity": ""
+      }
     }
-  }],
+  ],
   "DefaultCacheBehavior": {
     "TargetOriginId": "S3-your-portfolio-bucket",
     "ViewerProtocolPolicy": "redirect-to-https",
     "Compress": true,
     "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
   },
-  "CustomErrorResponses": [{
-    "ErrorCode": 404,
-    "ResponseCode": 200,
-    "ResponsePagePath": "/index.html"
-  }]
+  "CustomErrorResponses": [
+    {
+      "ErrorCode": 404,
+      "ResponseCode": 200,
+      "ResponsePagePath": "/index.html"
+    }
+  ]
 }
 ```
 
 ### Google Cloud Platform
 
 #### Google Cloud Storage
+
 ```bash
 # Create bucket
 gsutil mb gs://your-portfolio-bucket
@@ -253,6 +273,7 @@ gsutil web set -m index.html -e index.html gs://your-portfolio-bucket
 ### Build Optimizations
 
 #### Vite Configuration
+
 ```javascript
 // vite.config.js
 export default defineConfig({
@@ -260,19 +281,20 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'three': ['three'],
-          'react-three': ['@react-three/fiber', '@react-three/drei'],
-          'gsap': ['gsap'],
-          'ui': ['lucide-react', 'class-variance-authority']
-        }
-      }
+          three: ["three"],
+          "react-three": ["@react-three/fiber", "@react-three/drei"],
+          gsap: ["gsap"],
+          ui: ["lucide-react", "class-variance-authority"],
+        },
+      },
     },
-    chunkSizeWarningLimit: 1000
-  }
+    chunkSizeWarningLimit: 1000,
+  },
 });
 ```
 
 #### Asset Optimization
+
 ```bash
 # Install optimization tools
 npm install --save-dev vite-plugin-imagemin
@@ -295,14 +317,16 @@ export default defineConfig({
 ### CDN Configuration
 
 #### Asset Delivery
+
 - Use CDN for 3D models and images
 - Configure proper cache headers
 - Implement lazy loading for large assets
 
 #### Example CDN Setup
+
 ```javascript
 // constants/index.js
-const CDN_BASE = 'https://cdn.yourdomain.com';
+const CDN_BASE = "https://cdn.yourdomain.com";
 
 export const techCategories = [
   {
@@ -313,26 +337,30 @@ export const techCategories = [
         modelPath: `${CDN_BASE}/models/react_logo-transformed.glb`,
         logoPath: `${CDN_BASE}/images/logos/react.png`,
         // ... other config
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];
 ```
 
 ## 🔐 Security Considerations
 
 ### Content Security Policy
+
 ```html
 <!-- Add to index.html -->
-<meta http-equiv="Content-Security-Policy" 
-      content="default-src 'self'; 
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; 
                script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
                style-src 'self' 'unsafe-inline'; 
                img-src 'self' data: https:; 
-               font-src 'self' data:;">
+               font-src 'self' data:;"
+/>
 ```
 
 ### Environment Variables
+
 ```bash
 # .env.production
 VITE_API_URL=https://api.yourdomain.com
@@ -345,11 +373,12 @@ VITE_ANALYTICS_ID=prod_analytics_id
 ## 📊 Monitoring and Analytics
 
 ### Vercel Analytics
+
 ```javascript
 // main.jsx
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
     <Analytics />
@@ -358,6 +387,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```
 
 ### Google Analytics
+
 ```javascript
 // Add to index.html
 <!-- Google tag (gtag.js) -->
@@ -371,11 +401,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```
 
 ### Performance Monitoring
+
 ```javascript
 // src/utils/performance.js
 export const trackWebVitals = (onPerfEntry) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+    import("web-vitals").then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
       getFID(onPerfEntry);
       getFCP(onPerfEntry);
@@ -391,6 +422,7 @@ export const trackWebVitals = (onPerfEntry) => {
 ### Common Issues
 
 #### Build Failures
+
 ```bash
 # Clear node modules and reinstall
 rm -rf node_modules package-lock.json
@@ -404,18 +436,21 @@ node --version # Should be 18.x or higher
 ```
 
 #### 3D Model Loading Issues
+
 - Verify model files are in `/public/models/`
 - Check file paths in constants
 - Ensure models are optimized GLB format
 - Test with smaller models first
 
 #### Deployment Issues
+
 - Check build output in `dist/` folder
 - Verify environment variables
 - Test locally with `npm run preview`
 - Check browser console for errors
 
 ### Performance Issues
+
 ```bash
 # Analyze bundle size
 npm install --save-dev vite-bundle-analyzer
@@ -428,6 +463,7 @@ npm ls --depth=0 --long
 ## 📝 Maintenance
 
 ### Regular Updates
+
 ```bash
 # Update dependencies
 npm update
@@ -441,6 +477,7 @@ npm outdated
 ```
 
 ### Backup Strategy
+
 - Regular backups of source code
 - Database backups (if applicable)
 - Asset backups (3D models, images)

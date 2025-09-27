@@ -7,18 +7,21 @@ This 3D portfolio is built using a modern React architecture with Three.js integ
 ### Core Technologies
 
 #### React 19
+
 - Latest React features including concurrent rendering
 - Functional components with hooks
 - Custom hook patterns for reusable logic
 - Context API for state management
 
 #### Three.js + React Three Fiber
+
 - **React Three Fiber**: React renderer for Three.js
 - **React Three Drei**: Helper components and utilities
 - **React Three Postprocessing**: Post-processing effects
 - Custom 3D scenes and models integration
 
 #### GSAP (GreenSock Animation Platform)
+
 - High-performance animations
 - Timeline-based animation sequences
 - Cross-browser compatibility
@@ -48,6 +51,7 @@ src/
 ### Component Patterns
 
 #### 1. Section Components
+
 Each main section (Hero, About, TechStack, Projects) follows this pattern:
 
 ```jsx
@@ -68,15 +72,16 @@ const SectionComponent = () => {
 ```
 
 #### 2. 3D Model Components
+
 3D components use React Three Fiber patterns:
 
 ```jsx
 const Model3D = ({ modelPath, scale, rotation, position }) => {
   const { scene } = useGLTF(modelPath);
-  
+
   return (
-    <primitive 
-      object={scene} 
+    <primitive
+      object={scene}
       scale={scale}
       rotation={rotation}
       position={position}
@@ -90,11 +95,13 @@ const Model3D = ({ modelPath, scale, rotation, position }) => {
 ### Model Loading and Optimization
 
 #### GLB Model Format
+
 - All 3D models are in GLB (binary glTF) format
 - Optimized for web delivery with Draco compression
 - Models are lazy-loaded to improve initial page load
 
 #### Model Configuration
+
 Models are configured in `constants/index.js`:
 
 ```javascript
@@ -111,24 +118,26 @@ Models are configured in `constants/index.js`:
 ### 3D Scene Setup
 
 #### Lighting Configuration
+
 ```jsx
 // Ambient lighting for overall scene illumination
 <ambientLight intensity={0.5} />
 
 // Directional lighting for shadows and depth
-<directionalLight 
-  position={[10, 10, 5]} 
-  intensity={1} 
+<directionalLight
+  position={[10, 10, 5]}
+  intensity={1}
 />
 
 // Point lights for specific highlighting
-<pointLight 
-  position={[0, 5, 0]} 
-  intensity={0.8} 
+<pointLight
+  position={[0, 5, 0]}
+  intensity={0.8}
 />
 ```
 
 #### Camera Configuration
+
 - Perspective camera with optimized FOV
 - Responsive camera positioning
 - Smooth camera transitions with animations
@@ -136,14 +145,17 @@ Models are configured in `constants/index.js`:
 ### Performance Optimizations
 
 #### Level of Detail (LOD)
+
 - Different model complexities for different screen sizes
 - Automatic quality adjustment based on device capabilities
 
 #### Frustum Culling
+
 - Objects outside camera view are not rendered
 - Automatic optimization by Three.js
 
 #### Texture Optimization
+
 - Compressed texture formats (WebP, AVIF)
 - Mipmapping for distant objects
 - Texture atlasing for multiple materials
@@ -153,10 +165,11 @@ Models are configured in `constants/index.js`:
 ### GSAP Integration
 
 #### Timeline-Based Animations
+
 ```jsx
 useGSAP(() => {
   const tl = gsap.timeline();
-  
+
   tl.fromTo(
     ".hero-animation",
     { y: 50, opacity: 0 },
@@ -166,11 +179,13 @@ useGSAP(() => {
 ```
 
 #### Scroll-Triggered Animations
+
 - Intersection Observer for performance
 - Lazy animation loading
 - Smooth scroll interactions
 
 ### 3D Model Animations
+
 - Rotation animations for tech stack models
 - Hover effects with smooth transitions
 - Loading state animations
@@ -178,12 +193,14 @@ useGSAP(() => {
 ## Responsive Design Implementation
 
 ### Breakpoint Strategy
+
 - Mobile-first approach
 - Desktop: 1280px+ (xl)
 - Tablet: 768px-1279px (md)
 - Mobile: <768px (sm)
 
 ### 3D Responsive Patterns
+
 ```jsx
 const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
 
@@ -196,6 +213,7 @@ return (
 ```
 
 ### Touch Interactions
+
 - Touch-optimized 3D controls
 - Gesture recognition for model manipulation
 - Performance considerations for mobile GPU
@@ -203,6 +221,7 @@ return (
 ## State Management
 
 ### Component State Patterns
+
 ```jsx
 const [isLoading, setIsLoading] = useState(false);
 const [modelLoaded, setModelLoaded] = useState(false);
@@ -210,6 +229,7 @@ const [animationComplete, setAnimationComplete] = useState(false);
 ```
 
 ### Context Usage
+
 - Minimal global state
 - Focused on user preferences and theme
 - Performance-conscious implementation
@@ -217,6 +237,7 @@ const [animationComplete, setAnimationComplete] = useState(false);
 ## Chatbot Implementation
 
 ### Service Architecture
+
 ```javascript
 // chatbotService.js
 export const chatbotService = {
@@ -224,48 +245,53 @@ export const chatbotService = {
     // API integration logic
     // Response processing
     // Error handling
-  }
+  },
 };
 ```
 
 ### Message State Management
+
 - Local state for chat history
 - Optimistic UI updates
 - Typing indicators and loading states
 
 ### UI Components
+
 - `ChatBot.jsx`: Main chat interface
-- `ChatMessage.jsx`: Individual message component  
+- `ChatMessage.jsx`: Individual message component
 - `TypingIndicator.jsx`: Loading animation
 
 ## Build Configuration
 
 ### Vite Configuration
+
 ```javascript
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
-    alias: { "@": path.resolve(__dirname, "./src") }
+    alias: { "@": path.resolve(__dirname, "./src") },
   },
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
-          three: ['three'],
-          gsap: ['gsap']
-        }
-      }
-    }
-  }
+          three: ["three"],
+          gsap: ["gsap"],
+        },
+      },
+    },
+  },
 });
 ```
 
 ### Code Splitting Strategy
+
 - Route-based splitting for sections
 - Library-based chunks (Three.js, GSAP)
 - Dynamic imports for 3D models
 
 ### Asset Optimization
+
 - Image compression pipeline
 - 3D model optimization
 - Font subsetting and preloading
@@ -273,12 +299,14 @@ export default defineConfig({
 ## Performance Monitoring
 
 ### Metrics Tracked
+
 - First Contentful Paint (FCP)
 - Largest Contentful Paint (LCP)
 - Cumulative Layout Shift (CLS)
 - 3D rendering performance (FPS)
 
 ### Optimization Techniques
+
 - Lazy loading for non-critical assets
 - Image optimization with WebP/AVIF
 - Critical CSS inlining
@@ -287,6 +315,7 @@ export default defineConfig({
 ## Development Workflow
 
 ### Local Development
+
 ```bash
 npm run dev    # Start development server
 npm run build  # Production build
@@ -295,11 +324,13 @@ npm run lint   # Code linting
 ```
 
 ### Code Quality
+
 - ESLint configuration for React and Three.js
 - Prettier for code formatting
 - Git hooks for pre-commit validation
 
 ### Testing Considerations
+
 - Component testing with React Testing Library
 - Visual regression testing for 3D scenes
 - Performance testing with Lighthouse CI
@@ -307,17 +338,20 @@ npm run lint   # Code linting
 ## Browser Compatibility
 
 ### WebGL Requirements
+
 - WebGL 1.0 support (most modern browsers)
 - Fallback for devices without WebGL
 - Progressive enhancement approach
 
 ### Supported Browsers
+
 - Chrome 90+
 - Firefox 88+
 - Safari 14+
 - Edge 90+
 
 ### Polyfills and Fallbacks
+
 - WebGL fallback messages
 - Reduced motion preferences
 - Touch interaction alternatives
@@ -325,11 +359,13 @@ npm run lint   # Code linting
 ## Deployment Architecture
 
 ### Static Site Generation
+
 - Pre-built static assets
 - CDN-optimized delivery
 - Edge caching strategies
 
 ### Environment Configuration
+
 - Development vs Production builds
 - Environment variable management
 - API endpoint configuration
