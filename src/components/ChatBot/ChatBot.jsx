@@ -95,7 +95,9 @@ const ChatBot = () => {
   const toggleChat = () => {
     setIsOpen(!isOpen);
     if (!isOpen) {
-      setIsMinimized(false);
+      // Don't minimize on mobile, only on desktop
+      const isMobile = window.innerWidth < 640;
+      setIsMinimized(isMobile ? false : false);
     }
   };
 
@@ -118,50 +120,61 @@ const ChatBot = () => {
 
   return (
     <div
-      className={`fixed ${isMinimized ? "bottom-0" : "bottom-3"} right-3 z-50`}
+      className={`fixed ${
+        isMinimized ? "bottom-0" : "bottom-3"
+      } right-3 sm:right-4 md:right-6 z-[1000] ${
+        isOpen ? "left-3 sm:left-auto" : ""
+      }`}
     >
       {/* Chat Window */}
       {isOpen && (
         <div
           className={`bg-black-100 shadow-2xl border border-white/10 transition-all duration-300 ${
-            isMinimized ? "w-96 h-16 rounded-t-2xl" : "w-96 rounded-2xl"
+            isMinimized
+              ? "w-full sm:w-96 h-16 rounded-t-2xl"
+              : "w-full sm:w-96 md:w-96 rounded-2xl max-h-[85vh] sm:max-h-screen"
           }`}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-white/10 rounded-t-2xl bg-black-50">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-white-50/10 flex items-center justify-center">
-                <Bot size={20} className="text-white-50" />
+          <div className="flex items-center justify-between p-3 sm:p-4 border-b border-white/10 rounded-t-2xl bg-black-50">
+            <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
+              <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-white-50/10 flex items-center justify-center flex-shrink-0">
+                <Bot size={16} className="text-white-50 sm:size-5" />
               </div>
-              <div>
-                <h3 className="font-medium text-sm text-white-50">
-                  Gerald's AI Assistant
+              <div className="min-w-0">
+                <h3 className="font-medium text-xs sm:text-sm text-white-50 truncate">
+                  Gerald's Assistant
                 </h3>
                 <p className="text-xs text-white-50/60">Online</p>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
+              {/* Minimize button - only show on desktop */}
               <button
                 onClick={toggleMinimize}
-                className="w-8 h-8 rounded-full bg-white-50/10 hover:bg-white-50/20 flex items-center justify-center transition-colors"
+                className="hidden sm:inline-flex w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-white-50/10 hover:bg-white-50/20 items-center justify-center transition-colors"
               >
                 {isMinimized ? (
                   <Maximize2
-                    size={16}
-                    className="text-white-50 cursor-pointer"
+                    size={14}
+                    className="text-white-50 cursor-pointer sm:size-4"
                   />
                 ) : (
                   <Minimize2
-                    size={16}
-                    className="text-white-50 cursor-pointer"
+                    size={14}
+                    className="text-white-50 cursor-pointer sm:size-4"
                   />
                 )}
               </button>
+              {/* Close button */}
               <button
                 onClick={toggleChat}
-                className="w-8 h-8 rounded-full bg-white-50/10 hover:bg-white-50/20 flex items-center justify-center transition-colors"
+                className="w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-white-50/10 hover:bg-white-50/20 flex items-center justify-center transition-colors"
               >
-                <X size={16} className="text-white-50 cursor-pointer" />
+                <X
+                  size={14}
+                  className="text-white-50 cursor-pointer sm:size-4"
+                />
               </button>
             </div>
           </div>
@@ -170,7 +183,7 @@ const ChatBot = () => {
           {!isMinimized && (
             <>
               {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 h-[400px] bg-black">
+              <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 h-[300px] sm:h-[400px] md:h-[450px] bg-black">
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
@@ -179,7 +192,7 @@ const ChatBot = () => {
 
                 {messages.length === 1 && (
                   <div className="space-y-2">
-                    <p className="text-sm text-white-50/60 text-center mb-3">
+                    <p className="text-xs sm:text-sm text-white-50/60 text-center mb-3">
                       Try asking me about:
                     </p>
                     <div className="grid grid-cols-1 gap-2">
@@ -187,7 +200,7 @@ const ChatBot = () => {
                         <button
                           key={index}
                           onClick={() => handleSuggestionClick(suggestion)}
-                          className="text-left p-3 text-xs bg-black-50 hover:bg-black-200 text-white-50 rounded-lg transition-colors border border-white/5"
+                          className="text-left p-2 sm:p-3 text-xs bg-black-50 hover:bg-black-200 text-white-50 rounded-lg transition-colors border border-white/5 truncate"
                         >
                           {suggestion}
                         </button>
@@ -200,31 +213,31 @@ const ChatBot = () => {
               </div>
 
               {/* Input Area */}
-              <div className="p-4 border-t border-white/10 bg-black-100 rounded-b-2xl">
-                <div className="flex justify-center space-x-2">
+              <div className="p-3 sm:p-4 border-t border-white/10 bg-black-100 rounded-b-2xl">
+                <div className="flex justify-center gap-2">
                   <div className="flex-1 relative">
                     <textarea
                       ref={inputRef}
                       value={inputMessage}
                       onChange={(e) => setInputMessage(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      placeholder="Ask me about Gerald's portfolio..."
-                      className="w-full px-4 py-2 pr-12 border border-white/10 rounded-xl resize-none focus:outline-none focus:ring-1 focus:ring-white-50/30 bg-black-50 text-white-50 placeholder:text-white-50/40 text-sm"
+                      placeholder="Ask me something..."
+                      className="w-full px-3 sm:px-4 py-2 pr-10 sm:pr-12 border border-white/10 rounded-xl resize-none focus:outline-none focus:ring-1 focus:ring-white-50/30 bg-black-50 text-white-50 placeholder:text-white-50/40 text-xs sm:text-sm"
                       rows="1"
-                      style={{ minHeight: "40px", maxHeight: "120px" }}
+                      style={{ minHeight: "36px", maxHeight: "100px" }}
                       disabled={isLoading}
                     />
                   </div>
                   <button
                     onClick={handleSendMessage}
                     disabled={!inputMessage.trim() || isLoading}
-                    className="w-10 h-10 bg-white-50 text-black hover:bg-white-50/90 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-all duration-200 transform hover:scale-105"
+                    className="w-9 sm:w-10 h-9 sm:h-10 bg-white-50 text-black hover:bg-white-50/90 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl flex items-center justify-center transition-all duration-200 transform hover:scale-105 flex-shrink-0"
                   >
-                    <Send size={16} className="cursor-pointer" />
+                    <Send size={16} className="cursor-pointer sm:size-4" />
                   </button>
                 </div>
-                <div className="text-xs text-white-50/40 mt-2 text-center">
-                  Powered by AI • Press Enter to send
+                <div className="text-xs text-white-50/40 mt-1 sm:mt-2 text-center">
+                  Press Enter to send
                 </div>
               </div>
             </>
@@ -234,12 +247,12 @@ const ChatBot = () => {
 
       {/* Toggle Button - Only show when chat is closed */}
       {!isOpen && (
-        <div className="mb-6 mr-6 relative">
+        <div className="mb-4 sm:mb-6 mr-3 sm:mr-6 relative">
           <button
             onClick={toggleChat}
-            className="w-14 h-14 bg-white-50 hover:bg-white-50/90 text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform hover:scale-105"
+            className="w-12 sm:w-14 h-12 sm:h-14 bg-white-50 hover:bg-white-50/90 text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center transform hover:scale-105"
           >
-            <MessageCircle size={24} />
+            <MessageCircle size={20} className="sm:size-6" />
           </button>
 
           {/* Subtle Notification Indicator */}
