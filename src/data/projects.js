@@ -1,6 +1,5 @@
 const projectsData = [
   {
-    
     id: 0,
     title: "AWS - TedxPup Challenge",
     description:
@@ -9,6 +8,16 @@ const projectsData = [
     tags: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/geraldsberongoy/tedx-pup-website",
     projectUrl: "https://geraldsberongoy.github.io/tedx-pup-website/",
+  },
+  {
+    id: 1,
+    title: "Isko-Chat Ai",
+    description:
+      "An app built to assist students in finding scholarships and educational resources. A collaborative project and I mainly focus on front-end and back-end development.",
+    image: "/images/projects/isko-chat.png",
+    tags: ["Next.js", "Supabase", "TailwindCSS", "AI"],
+    githubUrl: "https://github.com/DavidBatoDev/iskochatai",
+    projectUrl: "https://iskochatai.vercel.app/",
   },
   {
     id: 2,
