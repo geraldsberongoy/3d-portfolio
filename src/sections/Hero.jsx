@@ -51,9 +51,9 @@ const Hero = () => {
         <div className="hero-layout">
           {/* HERO CONTENT */}
           <header
-            className={`flex flex-col justify-center${
+            className={`flex flex-col justify-center ${
               isDesktop ? "md:w-full" : "w-full"
-            } ${!isDesktop && "items-center"}`}
+            }`}
           >
             <div
               className={`flex flex-col gap-4 ${
@@ -161,7 +161,7 @@ const Hero = () => {
 
               <div>
                 <p className="text-white-50 md:text-xl relative z-10 pointer-events-none hero-animation">
-                  A sophomore Computer engineering student crafting innovative
+                  A junior Computer engineering student crafting innovative
                   solutions.
                 </p>
                 <div className="flex gap-3 mt-7 z-20">

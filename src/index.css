@@ -69,6 +69,99 @@ section {
   -webkit-transform: translateZ(0);
 }
 
+/* ========================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* Reduce animations on mobile for better performance */
+@media (max-width: 768px) {
+  /* Disable hover effects (they don't work on touch anyway) */
+  .cta-button:hover,
+  .tech-card:hover,
+  .contact-btn:hover {
+    transform: none !important;
+  }
+
+  /* Reduce animation durations - EXCEPT for elements that need proper timing */
+  *:not(.wrapper):not(.slide):not(.cta-button):not(.cta-button *):not(.bg-circle):not(.arrow-wrapper):not(.arrow-wrapper *) {
+    animation-duration: 0.3s !important;
+  }
+  
+  /* Keep transitions smooth for interactive elements */
+  *:not(.cta-button):not(.cta-button *):not(.bg-circle):not(.arrow-wrapper):not(.arrow-wrapper *) {
+    transition-duration: 0.2s !important;
+  }
+  
+  /* Preserve word slider animation timing */
+  .wrapper {
+    animation-duration: 21s !important;
+  }
+  
+  /* Preserve CTA button animations */
+  .cta-button,
+  .cta-button *,
+  .bg-circle,
+  .arrow-wrapper,
+  .arrow-wrapper * {
+    transition-duration: 0.5s !important;
+  }
+
+  /* Disable complex animations */
+  .tech-card-animated-bg {
+    display: none !important;
+  }
+
+  /* Optimize scrolling */
+  html, body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  /* Reduce blur effects (expensive on mobile) */
+  .backdrop-blur-md,
+  .backdrop-blur-sm {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+
+  /* Smaller tap targets, bigger touch areas */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Reduce shadow complexity */
+  .shadow-lg,
+  .shadow-xl {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .wrapper {
+    animation: none !important;
+  }
+}
+
+/* Battery saver / low power mode hints */
+@media (prefers-reduced-motion: reduce), (update: slow) {
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
 @theme {
   --font-sans: "Mona Sans", sans-serif;
   --color-white-50: #d9ecff;
@@ -131,7 +224,12 @@ section {
   }
 
   .hero-layout {
-    @apply relative z-10 xl:mt-10 mx-auto h-screen flex items-center justify-center md:justify-start;
+    @apply relative z-10 xl:mt-10 mx-auto min-h-screen flex items-center justify-start py-20 md:py-0;
+  }
+
+  /* Mobile-specific hero content - left aligned */
+  .hero-content-wrapper {
+    @apply text-left px-0;
   }
 
   .hero-text {
@@ -141,6 +239,8 @@ section {
     }
     .slide {
       @apply absolute pt-0 px-2 md:px-5 py-[30px] h-[35px] md:h-[60px] md:translate-y-1 translate-y-0 overflow-hidden;
+      /* Ensure text doesn't get cut off on mobile */
+      min-width: 180px;
     }
   }
 
@@ -209,7 +309,7 @@ section {
   }
 
   .cta-button {
-    @apply px-4 py-3 md:py-4 rounded-lg hover:scale-[1.03] duration-300 transition-all bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
+    @apply px-4 py-3 md:py-4 rounded-lg hover:scale-[1.03] duration-300 transition-all bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden min-h-[52px];
 
     .bg-circle {
       @apply absolute -right-10 origin-center top-1/2 -translate-y-1/2 
@@ -218,7 +318,7 @@ section {
     }
 
     .text {
-      @apply text-[13px] md:text-base text-black transition-all duration-500
+      @apply text-[11px] md:text-base text-black transition-all duration-500 whitespace-nowrap
         md:group-hover:text-white-50 md:group-hover:-translate-x-5 md:-translate-x-0 translate-x-0;
     }
 

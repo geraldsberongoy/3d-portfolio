@@ -221,7 +221,7 @@ const About = () => {
                     <br />
                     <span className="text-blue-300 ml-8">"year"</span>
                     <span className="text-white">:</span>
-                    <span className="text-green-300"> "Sophomore"</span>
+                    <span className="text-green-300"> "Junior"</span>
                     <br />
                     <span className="text-white ml-4">{"}"}</span>,
                     <br />
@@ -252,7 +252,7 @@ const About = () => {
             </div>
 
             <p className="text-white-50 md:text-lg">
-              I'm a passionate sophomore Computer Engineering student at
+              I'm a passionate junior Computer Engineering student at
               Polytechnic University of the Philippines with a focus on creating
               innovative digital experiences. My journey in tech started with
               curiosity about how software and hardware interact to create
