@@ -72,7 +72,7 @@ const Footer = () => {
     >
       {/* Background accents */}
       <div className="absolute top-0 left-1/4 size-64 rounded-full bg-blue-600/40 blur-3xl z-0" />
-      <di className="absolute bottom-0 right-1/4 size-64 rounded-full bg-purple-600/40 blur-3xl z-0" />
+      <div className="absolute bottom-0 right-1/4 size-64 rounded-full bg-purple-600/40 blur-3xl z-0" />
 
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="footer-animation grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">

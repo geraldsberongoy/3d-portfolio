@@ -1,13 +1,21 @@
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo, memo } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useMediaQuery } from "react-responsive";
+import { usePerformance } from "../../context/PerformanceContext";
 
-const Particles = ({ count = 200 }) => {
+const Particles = memo(({ count = 200 }) => {
   const mesh = useRef();
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const { settings, isLowTier } = usePerformance();
   const frameCount = useRef(0);
-  const updateFrequency = isMobile ? 3 : 1; // Only update particles every n frames on mobile
-  const actualCount = isMobile ? Math.floor(count / 2) : count; // Reduce particle count on mobile
+  
+  // Use performance tier settings for update frequency
+  const updateFrequency = settings.particleUpdateFrequency;
+  
+  // Adjust particle count based on performance tier and prop
+  const actualCount = useMemo(() => {
+    // If count is passed as prop, respect it but apply tier multiplier
+    const tierMultiplier = isLowTier ? 0.3 : 1;
+    return Math.floor(Math.min(count, settings.particleCount) * tierMultiplier);
+  }, [count, settings.particleCount, isLowTier]);
 
   const particles = useMemo(() => {
     const temp = [];
@@ -15,7 +23,7 @@ const Particles = ({ count = 200 }) => {
       temp.push({
         position: [
           (Math.random() - 0.5) * 10,
-          Math.random() * 10 + 5, // higher starting point
+          Math.random() * 10 + 5,
           (Math.random() - 0.5) * 10,
         ],
         speed: 0.005 + Math.random() * 0.001,
@@ -24,27 +32,35 @@ const Particles = ({ count = 200 }) => {
     return temp;
   }, [actualCount]);
 
+  const positions = useMemo(() => {
+    const posArray = new Float32Array(actualCount * 3);
+    particles.forEach((p, i) => {
+      posArray[i * 3] = p.position[0];
+      posArray[i * 3 + 1] = p.position[1];
+      posArray[i * 3 + 2] = p.position[2];
+    });
+    return posArray;
+  }, [particles, actualCount]);
+
   useFrame(() => {
-    // Skip frames to reduce CPU usage, especially on mobile
+    // Skip more frames on low-tier devices
     frameCount.current = (frameCount.current + 1) % updateFrequency;
     if (frameCount.current !== 0) return;
 
-    const positions = mesh.current.geometry.attributes.position.array;
+    if (!mesh.current?.geometry?.attributes?.position) return;
+
+    const positionsArray = mesh.current.geometry.attributes.position.array;
     for (let i = 0; i < actualCount; i++) {
-      let y = positions[i * 3 + 1];
+      let y = positionsArray[i * 3 + 1];
       y -= particles[i].speed;
       if (y < -2) y = Math.random() * 10 + 5;
-      positions[i * 3 + 1] = y;
+      positionsArray[i * 3 + 1] = y;
     }
     mesh.current.geometry.attributes.position.needsUpdate = true;
   });
 
-  const positions = new Float32Array(actualCount * 3);
-  particles.forEach((p, i) => {
-    positions[i * 3] = p.position[0];
-    positions[i * 3 + 1] = p.position[1];
-    positions[i * 3 + 2] = p.position[2];
-  });
+  // Don't render particles on extremely low-tier devices
+  if (actualCount < 5) return null;
 
   return (
     <points ref={mesh}>
@@ -58,14 +74,17 @@ const Particles = ({ count = 200 }) => {
       </bufferGeometry>
       <pointsMaterial
         color="#ffffff"
-        size={0.05}
+        size={isLowTier ? 0.03 : 0.05}
         transparent
-        opacity={0.9}
+        opacity={isLowTier ? 0.7 : 0.9}
         depthWrite={false}
         sizeAttenuation
       />
     </points>
   );
-};
+});
+
+Particles.displayName = "Particles";
 
 export default Particles;
+

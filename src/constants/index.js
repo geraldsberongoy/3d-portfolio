@@ -1,12 +1,12 @@
 export const words = [
-  { text: "Ideas", imgPath: "/images/ideas.svg" },
-  { text: "Concepts", imgPath: "/images/concepts.svg" },
-  { text: "Designs", imgPath: "/images/designs.svg" },
-  { text: "Code", imgPath: "/images/code.svg" },
-  { text: "Ideas", imgPath: "/images/ideas.svg" },
-  { text: "Concepts", imgPath: "/images/concepts.svg" },
-  { text: "Designs", imgPath: "/images/designs.svg" },
-  { text: "Code", imgPath: "/images/code.svg" },
+  { id: 1, text: "Ideas", imgPath: "/images/ideas.svg" },
+  { id: 2, text: "Concepts", imgPath: "/images/concepts.svg" },
+  { id: 3, text: "Designs", imgPath: "/images/designs.svg" },
+  { id: 4, text: "Code", imgPath: "/images/code.svg" },
+  { id: 5, text: "Ideas", imgPath: "/images/ideas.svg" },
+  { id: 6, text: "Concepts", imgPath: "/images/concepts.svg" },
+  { id: 7, text: "Designs", imgPath: "/images/designs.svg" },
+  { id: 8, text: "Code", imgPath: "/images/code.svg" },
 ];
 
 export const navLinks = [

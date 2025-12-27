@@ -108,11 +108,16 @@ const ProjectSection = () => {
                 ref={(el) => (projectRefs.current[index] = el)}
               >
                 {/* Project Card */}
-                <a
-                  href={project.githubUrl}
+                <div
+                  onClick={() => window.open(project.githubUrl, "_blank", "noopener,noreferrer")}
                   className="cursor-pointer block h-56 sm:h-48 md:h-52 lg:h-64 relative overflow-hidden rounded-xl"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  role="link"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      window.open(project.githubUrl, "_blank", "noopener,noreferrer");
+                    }
+                  }}
                 >
                   <div
                     className={`w-full h-full ${
@@ -132,6 +137,8 @@ const ProjectSection = () => {
                     {project.projectUrl && (
                       <a
                         href={project.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="absolute top-3 right-13 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 transition-all"
                         aria-label={`View ${project.title} live demo`}
                         title="View Live Demo"
@@ -173,7 +180,7 @@ const ProjectSection = () => {
                       )}
                     </div>
                   </div>
-                </a>
+                </div>
 
                 {/* Project title and description */}
                 <div className="mt-3 space-y-1.5">

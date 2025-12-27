@@ -140,7 +140,7 @@ const Hero = () => {
                     <span className="wrapper">
                       {words.map((word) => (
                         <span
-                          key={word.text}
+                          key={word.id}
                           className="flex items-center md:gap-3 gap-1 pb-2"
                         >
                           <img

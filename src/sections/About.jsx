@@ -82,26 +82,6 @@ const About = () => {
       }
     );
 
-    // Stats animation
-    gsap.fromTo(
-      ".stat-card",
-      {
-        scale: 0.9,
-        opacity: 0,
-      },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.2,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: ".about-stats",
-          start: "top 85%",
-        },
-      }
-    );
-
     // JSON card animations
     const jsonCard = jsonCardRef.current;
     if (jsonCard) {
