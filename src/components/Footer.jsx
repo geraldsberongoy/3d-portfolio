@@ -41,24 +41,24 @@ const Footer = () => {
     }
   };
 
-  // GSAP animations
+  // Optimized GSAP animations
   useGSAP(() => {
-    // Footer reveal animation
+    // Footer reveal animation - simplified
     gsap.fromTo(
       ".footer-animation > *",
-      {
-        y: 30,
-        opacity: 0,
-      },
+      { y: 20, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        stagger: 0.1,
+        duration: 0.5,
+        stagger: 0.05,
         ease: "power2.out",
+        force3D: true,
         scrollTrigger: {
           trigger: footerRef.current,
           start: "top 90%",
+          lazy: true,
+          fastScrollEnd: true,
         },
       }
     );

@@ -22,126 +22,106 @@ const About = () => {
   const jsonCardRef = useRef(null);
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
 
-  // GSAP animations
+  // Optimized GSAP animations with GPU acceleration
   useGSAP(() => {
-    // Heading animations
+    // Shared ScrollTrigger defaults for all animations
+    const scrollDefaults = {
+      lazy: true,
+      fastScrollEnd: true,
+    };
+
+    // Heading animation - simplified
     gsap.fromTo(
       ".about-title-animation",
-      {
-        y: 50,
-        opacity: 0,
-      },
+      { y: 30, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 1,
+        duration: 0.6,
         ease: "power2.out",
+        force3D: true,
         scrollTrigger: {
           trigger: "#about",
-          start: "top 80%",
+          start: "top 85%",
+          ...scrollDefaults,
         },
       }
     );
 
-    // Image reveal animation
+    // Image reveal animation - reduced distance
     gsap.fromTo(
       ".about-image",
-      {
-        x: -50,
-        opacity: 0,
-      },
+      { x: -30, opacity: 0 },
       {
         x: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: 0.8,
         ease: "power2.out",
+        force3D: true,
         scrollTrigger: {
           trigger: "#about",
-          start: "top 75%",
+          start: "top 80%",
+          ...scrollDefaults,
         },
       }
     );
 
-    // Content animation with staggered effect
+    // Content animation - reduced stagger and duration
     gsap.fromTo(
       ".about-content > *",
-      {
-        y: 30,
-        opacity: 0,
-      },
+      { y: 20, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        stagger: 0.15,
+        duration: 0.5,
+        stagger: 0.08,
         ease: "power2.out",
+        force3D: true,
         scrollTrigger: {
           trigger: "#about",
-          start: "top 70%",
+          start: "top 75%",
+          ...scrollDefaults,
         },
       }
     );
 
-    // JSON card animations
+    // JSON card - simplified animation
     const jsonCard = jsonCardRef.current;
     if (jsonCard) {
-      // Card entrance animation
       gsap.fromTo(
         jsonCard,
-        {
-          y: 50,
-          opacity: 0,
-          scale: 0.95,
-        },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "power3.out",
+          duration: 0.6,
+          ease: "power2.out",
+          force3D: true,
           scrollTrigger: {
             trigger: jsonCard,
             start: "top 85%",
+            ...scrollDefaults,
           },
         }
       );
 
-      // Type animation for the JSON content
+      // Simplified type animation - batch instead of individual
       const jsonLines = jsonCard.querySelectorAll("pre span");
       gsap.fromTo(
         jsonLines,
-        {
-          opacity: 0,
-          x: -10,
-        },
+        { opacity: 0 },
         {
           opacity: 1,
-          x: 0,
-          duration: 0.05,
-          stagger: 0.025,
+          duration: 0.3,
+          stagger: 0.015,
           ease: "none",
           scrollTrigger: {
             trigger: jsonCard,
-            start: "top 75%",
+            start: "top 80%",
+            ...scrollDefaults,
           },
         }
       );
-
-      // Blinking cursor effect
-      const cursor = document.createElement("span");
-      cursor.innerHTML = "|";
-      cursor.classList.add("text-blue-400", "animate-blink");
-      const lastLine = jsonLines[jsonLines.length - 1];
-      if (lastLine) {
-        lastLine.parentNode.appendChild(cursor);
-
-        gsap.to(cursor, {
-          opacity: 0,
-          repeat: -1,
-          yoyo: true,
-          duration: 0.7,
-        });
-      }
     }
   }, []);
 

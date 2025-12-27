@@ -41,14 +41,20 @@ const ProjectSection = () => {
   }, [currentPage]);
 
   useGSAP(() => {
-    // Simplified animations for header and projects
+    // Optimized header fade-in
     gsap.fromTo(
       headerRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.7, ease: "power1.out" }
+      { opacity: 0, y: 20 },
+      { 
+        opacity: 1, 
+        y: 0,
+        duration: 0.5, 
+        ease: "power2.out",
+        force3D: true,
+      }
     );
 
-    // Simple fade-in for project cards with minimal stagger
+    // Optimized project cards animation with batching
     projectRefs.current.forEach((ref, index) => {
       if (ref) {
         gsap.fromTo(
@@ -57,12 +63,15 @@ const ProjectSection = () => {
           {
             y: 0,
             opacity: 1,
-            duration: 0.5,
-            delay: 0.1 * (index % 3), // Subtle column-based stagger
-            ease: "power1.out",
+            duration: 0.4,
+            delay: 0.05 * (index % 3), // Minimal column-based stagger
+            ease: "power2.out",
+            force3D: true,
             scrollTrigger: {
               trigger: ref,
               start: "top bottom-=50",
+              lazy: true,
+              fastScrollEnd: true,
             },
           }
         );

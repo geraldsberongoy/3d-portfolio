@@ -19,18 +19,17 @@ const Hero = () => {
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
 
   useGSAP(() => {
-    // Text animation
+    // Minimal entry animation - fast and subtle
     gsap.fromTo(
       [".hero-animation", ".hero-text h2"],
-      {
-        y: 50,
-        opacity: 0,
-      },
+      { y: 10, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 1,
-        ease: "power2.in",
+        duration: 0.3,
+        ease: "power1.out",
+        stagger: 0.02,
+        force3D: true,
       }
     );
   });

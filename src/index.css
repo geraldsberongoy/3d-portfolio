@@ -54,6 +54,21 @@ section {
   width: 100dvw;
 }
 
+/* GPU acceleration hints for GSAP-animated elements */
+.hero-animation,
+.hero-text h2,
+.about-title-animation,
+.about-image,
+.about-content > *,
+.tech-card,
+.footer-animation > * {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
 @theme {
   --font-sans: "Mona Sans", sans-serif;
   --color-white-50: #d9ecff;
