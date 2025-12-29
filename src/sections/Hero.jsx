@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, Suspense, lazy } from "react";
 import { words } from "../constants";
 import Button from "../components/Button";
-import HeroExperience from "../components/HeroModels/HeroExperience";
+// import HeroExperience from "../components/HeroModels/HeroExperience"; // Lazy loaded below
+import RoomSkeleton from "../components/HeroModels/RoomSkeleton";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import {
@@ -13,10 +14,15 @@ import {
   Instagram,
 } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
+import { usePerformance } from "../context/PerformanceContext";
+
+// Lazy load the heavy 3D component so it doesn't block the initial load
+const HeroExperience = lazy(() => import("../components/HeroModels/HeroExperience"));
 
 const Hero = () => {
   const heroRef = useRef(null);
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
+  const { is3DEnabled } = usePerformance();
 
   useGSAP(() => {
     // Minimal entry animation - fast and subtle
@@ -190,7 +196,13 @@ const Hero = () => {
           {isDesktop && (
             <figure>
               <div className="hero-3d-layout">
-                <HeroExperience />
+                {is3DEnabled ? (
+                  <Suspense fallback={<RoomSkeleton />}>
+                    <HeroExperience />
+                  </Suspense>
+                ) : (
+                  <RoomSkeleton animated={false} />
+                )}
               </div>
             </figure>
           )}

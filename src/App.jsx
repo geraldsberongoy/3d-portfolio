@@ -6,6 +6,7 @@ import TechStack from "./sections/TechStack";
 import Footer from "./components/Footer";
 import ChatBot from "./components/ChatBot/ChatBot";
 import { PerformanceProvider } from "./context/PerformanceContext";
+import PerformanceControls from "./components/PerformanceToaster";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <ProjectSection />
       <Footer />
       <ChatBot />
+      <PerformanceControls />
     </PerformanceProvider>
   );
 };
