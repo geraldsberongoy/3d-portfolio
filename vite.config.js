@@ -11,4 +11,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom"],
+          "vendor-three-core": ["three"],
+          "vendor-three-ecosystem": ["@react-three/fiber", "@react-three/drei", "@react-three/postprocessing"],
+          "vendor-animation": ["gsap", "@gsap/react", "motion"],
+          "vendor-ui": ["lucide-react", "clsx", "tailwind-merge"],
+        },
+      },
+    },
+  },
 });
