@@ -6,6 +6,7 @@ import { Room } from "./Room";
 import HeroLights from "./HeroLights";
 import useInView from "./useInView";
 import { usePerformance } from "../../context/PerformanceContext";
+import RoomSkeleton from "./RoomSkeleton";
 
 // Memoized 3D scene content to prevent unnecessary re-renders
 const SceneContent = memo(({ settings, viewport, isInView }) => {
@@ -111,24 +112,7 @@ const HeroExperience = () => {
         </Canvas>
       ) : (
         /* Skeleton Screen - mimics the 3D scene layout */
-        <div className="w-full h-full flex items-center justify-center">
-          <div className="relative w-full h-full">
-            {/* Main skeleton shape mimicking room/desk setup */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              {/* Desk skeleton */}
-              <div className="relative">
-                {/* Monitor skeleton */}
-                <div className="w-48 h-32 md:w-64 md:h-44 lg:w-80 lg:h-52 rounded-lg bg-white/5 animate-pulse" />
-                {/* Desk surface skeleton */}
-                <div className="w-56 h-3 md:w-72 md:h-4 lg:w-96 lg:h-5 rounded bg-white/5 animate-pulse mt-2 mx-auto" />
-                {/* Keyboard skeleton */}
-                <div className="w-32 h-2 md:w-40 md:h-3 rounded bg-white/5 animate-pulse mt-3 mx-auto" />
-              </div>
-            </div>
-            {/* Ambient glow effect */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-blue-500/5 blur-3xl" />
-          </div>
-        </div>
+        <RoomSkeleton />
       )}
     </div>
   );

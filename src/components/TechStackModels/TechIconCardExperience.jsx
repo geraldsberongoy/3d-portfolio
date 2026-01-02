@@ -16,7 +16,7 @@ ModelFallback.displayName = "ModelFallback";
 
 // 2D Logo component for mobile/low-tier devices
 const Logo2D = memo(({ model }) => (
-  <div className="w-full h-full flex items-center justify-center bg-black-100 rounded-lg">
+  <div className="w-full h-full flex items-center justify-center bg-black-100 lg:bg-transparent rounded-lg">
     <div className="relative w-16 h-16 flex items-center justify-center">
       <img
         src={model.logoPath}
@@ -108,7 +108,7 @@ const ModelWithLoading = memo(({ model, settings, isLowTier, onLoaded }) => {
 ModelWithLoading.displayName = "ModelWithLoading";
 
 const TechIconCardExperience = memo(({ model, priority = false }) => {
-  const { settings, isLowTier, isHighTier, viewport } = usePerformance();
+  const { settings, isLowTier, isHighTier, viewport, is3DEnabled } = usePerformance();
   const { isMobile } = viewport;
   
   const [modelLoaded, setModelLoaded] = useState(false);
@@ -163,7 +163,11 @@ const TechIconCardExperience = memo(({ model, priority = false }) => {
   }, [isHighTier, priority]);
 
   // Determine what to render based on conditions
-  const shouldUse2DLogo = (isMobile || isLowTier) && model.logoPath;
+  // Use 2D logo if:
+  // 1. Device is mobile or low tier (original condition)
+  // 2. 3D is globally disabled via the control panel (NEW condition)
+  // 3. The 3D model loading failed (handled by error boundaries usually, but good to note)
+  const shouldUse2DLogo = ((isMobile || isLowTier) || !is3DEnabled) && model.logoPath;
 
   // Placeholder while not yet loading
   if (!shouldLoad) {

@@ -14,6 +14,7 @@ const PerformanceContext = createContext(null);
 export const PerformanceProvider = ({ children }) => {
   const { tier, settings, isLoading, gpuInfo } = usePerformanceTier();
   const [manualOverride, setManualOverride] = useState(null);
+  const [is3DEnabled, setIs3DEnabled] = useState(true);
   const [viewportSize, setViewportSize] = useState({
     isMobile: false,
     isTablet: false,
@@ -103,7 +104,11 @@ export const PerformanceProvider = ({ children }) => {
     // Quick access to common checks
     shouldUseSimpleMaterials: effectiveSettings.useLowPolyMaterials,
     shouldEnableEffects: effectiveSettings.enableBloom || effectiveSettings.enableEnvironment,
-  }), [effectiveTier, effectiveSettings, isLoading, gpuInfo, viewportSize, setPerformanceOverride, manualOverride]);
+    
+    // 3D Toggle
+    is3DEnabled,
+    setIs3DEnabled,
+  }), [effectiveTier, effectiveSettings, isLoading, gpuInfo, viewportSize, setPerformanceOverride, manualOverride, is3DEnabled]);
 
   return (
     <PerformanceContext.Provider value={value}>
