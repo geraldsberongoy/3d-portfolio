@@ -1,6 +1,7 @@
-import React, { useRef, Suspense, lazy } from "react";
+import React, { useRef, Suspense, lazy, useState } from "react";
 import { words } from "../constants";
 import Button from "../components/Button";
+import ResumeViewer from "../components/ResumeViewer";
 // import HeroExperience from "../components/HeroModels/HeroExperience"; // Lazy loaded below
 import RoomSkeleton from "../components/HeroModels/RoomSkeleton";
 import { useGSAP } from "@gsap/react";
@@ -20,6 +21,7 @@ import { usePerformance } from "../context/PerformanceContext";
 const HeroExperience = lazy(() => import("../components/HeroModels/HeroExperience"));
 
 const Hero = () => {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
   const heroRef = useRef(null);
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
   const { is3DEnabled } = usePerformance();
@@ -183,9 +185,10 @@ const Hero = () => {
                     className="md:w-60 md:h-16 w-full h-5 hero-animation"
                     id="counter"
                     svg={<SquareChartGantt className="text-black-50" />}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://docs.google.com/document/d/12Sj91nc5-t2na0UeoUpnIP3cTseSPudJ/edit?usp=sharing&ouid=108222698303140592739&rtpof=true&sd=true"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsResumeOpen(true);
+                    }}
                   />
                 </div>
               </div>
@@ -208,6 +211,12 @@ const Hero = () => {
           )}
         </div>
       </div>
+      
+      <ResumeViewer 
+        isOpen={isResumeOpen} 
+        onClose={() => setIsResumeOpen(false)}
+        docUrl="https://docs.google.com/document/d/12Sj91nc5-t2na0UeoUpnIP3cTseSPudJ/edit?usp=sharing&ouid=108222698303140592739&rtpof=true&sd=true"
+      />
     </section>
   );
 };

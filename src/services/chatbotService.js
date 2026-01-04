@@ -2,7 +2,7 @@
 class ChatbotService {
   constructor() {
     // Using your deployed API endpoint
-    this.baseURL = "https://chatbot-portfolio-two.vercel.app/api/v1";
+    this.baseURL = "https://chatbot-service-374437162930.asia-southeast1.run.app/api/v1";
   }
 
   async sendMessage(message) {
