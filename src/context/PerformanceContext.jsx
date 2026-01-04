@@ -14,7 +14,13 @@ const PerformanceContext = createContext(null);
 export const PerformanceProvider = ({ children }) => {
   const { tier, settings, isLoading, gpuInfo } = usePerformanceTier();
   const [manualOverride, setManualOverride] = useState(null);
-  const [is3DEnabled, setIs3DEnabled] = useState(true);
+  // Default to false (no 3D) on mobile (width <= 768px), true otherwise
+  const [is3DEnabled, setIs3DEnabled] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth > 768;
+    }
+    return true;
+  });
   const [viewportSize, setViewportSize] = useState({
     isMobile: false,
     isTablet: false,

@@ -122,7 +122,7 @@ const ChatBot = () => {
     <div
       className={`fixed ${
         isMinimized ? "bottom-0" : "bottom-3"
-      } right-3 sm:right-4 md:right-6 z-[1000] ${
+      } right-3 sm:right-4 md:right-6 z-[50] ${
         isOpen ? "left-3 sm:left-auto" : ""
       }`}
     >

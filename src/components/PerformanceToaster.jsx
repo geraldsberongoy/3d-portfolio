@@ -9,11 +9,17 @@ const PerformanceControls = () => {
     is3DEnabled, 
     setIs3DEnabled, 
     setPerformanceOverride,
-    hasOverride 
+    hasOverride,
+    viewport 
   } = usePerformance();
+  
+  // Hide completely on mobile
+  if (viewport.isMobile) return null;
   
   const [isOpen, setIsOpen] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+
+
 
   const togglePanel = () => {
     setIsOpen(!isOpen);
