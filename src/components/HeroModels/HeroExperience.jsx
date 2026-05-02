@@ -103,7 +103,7 @@ const HeroExperience = () => {
   return (
     <div ref={containerRef} className="w-full h-full">
       {shouldRender ? (
-        <Canvas {...canvasConfig()}>
+        <Canvas {...canvasConfig()} style={{ touchAction: 'pan-y' }}>
           <SceneContent 
             settings={settings} 
             viewport={viewport} 

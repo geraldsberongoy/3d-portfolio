@@ -40,14 +40,17 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-html,
-body {
-  width: 100dvw;
-  overflow-x: hidden;
+html {
   background-color: black;
   color: white;
   scroll-behavior: smooth;
   font-family: "Mona Sans", sans-serif;
+}
+
+body {
+  background-color: black;
+  color: white;
+  width: 100%;
 }
 
 section {
@@ -114,9 +117,8 @@ section {
   }
 
   /* Optimize scrolling */
-  html, body {
+  body {
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
   }
 
   /* Reduce blur effects (expensive on mobile) */

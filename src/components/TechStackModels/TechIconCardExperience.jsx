@@ -194,7 +194,7 @@ const TechIconCardExperience = memo(({ model, priority = false }) => {
   // Desktop/high-tier: render 3D model with Canvas
   return (
     <div ref={containerRef} className="w-full h-full">
-      <Canvas {...canvasOptions}>
+      <Canvas {...canvasOptions} style={{ touchAction: 'pan-y' }}>
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 5, 5]} intensity={0.8} />
         
