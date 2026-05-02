@@ -45,7 +45,7 @@ const ProjectSection = () => {
         img.src = project.image;
       }
     });
-  }, [currentPage, viewMode]);
+  }, [currentPage, viewMode, projectsPerPage]);
 
   useGSAP(() => {
     // Optimized header fade-in

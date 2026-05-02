@@ -35,7 +35,7 @@ const useInView = (options = {}) => {
         observer.unobserve(currentRef);
       }
     };
-  }, [options.threshold, options.rootMargin]);
+  }, [options.threshold, options.rootMargin, options]);
 
   return [ref, isInView];
 };

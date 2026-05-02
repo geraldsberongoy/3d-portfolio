@@ -13,11 +13,11 @@ const PerformanceControls = () => {
     viewport 
   } = usePerformance();
   
-  // Hide completely on mobile
-  if (viewport.isMobile) return null;
-  
   const [isOpen, setIsOpen] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+
+  // Hide completely on mobile
+  if (viewport.isMobile) return null;
 
 
 
