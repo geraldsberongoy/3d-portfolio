@@ -2,7 +2,7 @@
 
 A modern, interactive 3D portfolio website showcasing projects, skills, and experience with stunning visual effects and smooth animations.
 
-![Portfolio Preview](public/images/bg.png)
+![Portfolio Preview](public/images/image.png)
 
 ## ✨ Features
 
